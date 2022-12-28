@@ -1,0 +1,174 @@
+
+// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_interpolation_to_compose_strings, prefer_conditional_assignment
+
+import 'dart:convert';
+import 'dart:ffi';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get_connect/http/src/request/request.dart';
+
+class ApiService extends GetxService {
+    static const String noInternetMessage = 'Connection to API server failed due to internet connection';
+
+    getToken() async {
+      // Replace with your API key and secret
+      String email = 'blgnbalogun53@gmail.com';
+      String apikey = 'giqKtpNsS1yBHDhO08Um';
+      String baseUrl = 'https://kuda-openapi.kuda.com/v2/Account/GetToken';
+
+      // Set the headers for the HTTP request
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
+
+      // Make the HTTP GET request to the Kuda Open API
+      http.Response response = await http.post(
+        Uri.parse(baseUrl),
+        body: json.encode({'email': email, 'apikey': apikey}),
+        headers: headers,
+      );
+
+      // Check the status code of the response
+      if (response.statusCode == 200) {
+        // If the request was successful, parse the JSON response
+        String data = response.body;
+        return data;
+        //print(data);
+        //return handleResponse(response, baseUrl);
+        // Access the data as needed
+      } else {
+        // If the request was not successful, handle the error
+        //return const Response(statusCode: 1, statusText: noInternetMessage);
+      }
+  }
+
+  Future<Response> makeRequest(String action, Map<String, dynamic> payload, [String? requestRef])  async {
+
+    // Replace with your API key and secret
+    String email = 'blgnbalogun53@gmail.com';
+    String apikey = 'giqKtpNsS1yBHDhO08Um';
+    String baseUrl = 'https://kuda-openapi.kuda.com/v2/Account/GetToken';
+
+    // Set the headers for the HTTP request
+    Map<String, String> headers = {
+      'Authorization': 'Bearer ' + getToken().toString(),
+      'Content-Type': 'application/json',
+    };
+
+    // Generate a random request reference if one is not provided
+    if (requestRef == null) {
+      requestRef = bin2hex(randomBytes(10));
+    }
+
+    // Set the request body
+    Map<String, dynamic> body = {
+      'data': jsonEncode({
+        'serviceType': action,
+        'requestRef': requestRef,
+        'data': payload,
+      }),
+    };
+
+    http.Response response = await http.post(
+      Uri.parse(''),
+      body: body,
+      headers: headers,
+    );
+
+    return handleResponse(response, baseUrl);
+  }
+
+  Response handleResponse(http.Response response, String uri) {
+    dynamic _body;
+    try {
+      _body = jsonDecode(response.body);
+    } catch (e) {}
+    Response _response = Response(
+      body: _body ?? response.body,
+      bodyString: response.body.toString(),
+      request: Request(headers: response.request!.headers, method: response.request!.method, url: response.request!.url),
+      headers: response.headers,
+      statusCode: response.statusCode,
+      statusText: response.reasonPhrase,
+    );
+    if (_response.statusCode != 200 && _response.body != null && _response.body is! String) {
+      if (_response.body.toString().startsWith('{errors: [{code:')) {
+        // ErrorResponse _errorResponse = ErrorResponse.fromJson(_response.body);
+        _response = Response(statusCode: _response.statusCode, body: _response.body, statusText: '_errorResponse.errors[0].message');
+      } else if (_response.body.toString().startsWith('{message')) {
+        _response = Response(statusCode: _response.statusCode, body: _response.body, statusText: _response.body['message']);
+      }
+    } else if (_response.statusCode != 200 && _response.body == null) {
+      _response = const Response(statusCode: 0, statusText: noInternetMessage);
+    }
+    debugPrint('====> API Response: [${_response.statusCode}] $uri\n${_response.body}');
+    return _response;
+  }
+}
+
+// Define a function to make a request to the API
+Future<Map<String, dynamic>> makeRequest(String action, Map<String, dynamic> payload, [String requestRef]) async {
+  // Set the base URL for the API
+  String baseUrl = 'API_BASE_URL';
+
+  // Generate a random request reference if one is not provided
+  if (requestRef == null) {
+    requestRef = bin2hex(randomBytes(10));
+  }
+
+  // Set the headers for the HTTP request
+  Map<String, String> headers = {
+    'Authorization': 'Bearer ${await getToken()}',
+    'Accept': 'application/json',
+  };
+
+  // Set the request body
+  Map<String, dynamic> body = {
+    'data': jsonEncode({
+      'serviceType': action,
+      'requestRef': requestRef,
+      'data': payload,
+    }),
+  };
+
+  // Set up the HTTP client
+  http.Client client = http.Client();
+
+  try {
+    // Make the HTTP POST request to the API
+    http.Response response = await client.post(baseUrl, headers: headers, body: body);
+
+    // Parse the JSON response
+    Map<String, dynamic> data = json.decode(response.body);
+    // Return the data
+    return data;
+  } on http.ClientException catch (exception) {
+    // If there was a client exception, get the response and return the error message
+    http.Response response = exception.response;
+    return {
+      'Status': false,
+      'Message': json.decode(response.body),
+    };
+  } catch (error) {
+    // If there was any other error, return the error message
+    return {'Status': false, 'Message': error.toString()};
+  } finally {
+    //
+
+
+  Future<List<Bank>?> _fetchSupportedBanks() async {
+    const url =
+        'https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true';
+    try {
+      http.Response response = await http.get(url.toUri());
+      Map<String, dynamic> body = json.decode(response.body);
+      var data = body['data'];
+      List<Bank> banks = [];
+      for (var bank in data) {
+        banks.add(new Bank(bank['name'], bank['id']));
+      }
+      return banks;
+    } catch (e) {}
+    return null;
+  }
