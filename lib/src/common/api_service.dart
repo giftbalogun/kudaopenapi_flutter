@@ -12,7 +12,7 @@ class ApiService extends GetxService {
     // Set the base URL for the API
     String baseUrl = 'https://kuda-openapi.kuda.com/v2';
 		String email = 'blgnbalogun53@gmail.com';
-		String apikey = 'giqKtpNsS1yBHDhO08Um';
+		String apikey = '#';
 
     // Set the endpoint for the API call
     String endpoint = '/Account/GetToken';
