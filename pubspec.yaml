@@ -1,6 +1,6 @@
 name: kudaopenapi
 description: Kudaopenapi is a library to allow communication with Kuda Bank API to setup your own fintech apps .
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/giftbalogun/kudaopenapi_flutter
 
 environment:

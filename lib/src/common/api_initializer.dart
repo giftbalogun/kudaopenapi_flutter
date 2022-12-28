@@ -50,7 +50,9 @@ class ApiInitialization extends GetxService {
     dynamic _body;
     try {
       _body = jsonDecode(response.body);
-    } catch (e) {}
+    } catch (e) {
+      e.toString();
+    }
     Response _response = Response(
       body: _body ?? response.body,
       bodyString: response.body.toString(),
