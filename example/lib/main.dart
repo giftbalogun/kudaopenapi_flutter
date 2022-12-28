@@ -34,12 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('KudaOpenAPI'),
-      ),
-      body: const Center(
-              child: CircularProgressIndicator(),
-            )
-    );
+        appBar: AppBar(
+          title: const Text('KudaOpenAPI'),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ));
   }
 }

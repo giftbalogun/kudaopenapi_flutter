@@ -1,39 +1,80 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<h1 align="center">KudaOpenPAI Integration in Flutter</h1>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/giftbalogun/kudaopenapi_flutter">
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+  <img alt="Issues" src="https://img.shields.io/github/stars/giftbalogun/kudaopenapi_flutter?color=56BEB8">
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+  <img alt="Star" src="	https://img.shields.io/github/stars/giftbalogun/kudaopenapi_flutter?color=56BEB8">
 
-## Features
+  <img alt="License" src="https://img.shields.io/github/license/giftbalogun/kudaopenapi_flutter?style=plastic&color=56BEB8">
+</p>
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+<!-- Status -->
 
-## Getting started
+<h4 align="center">
+	KudaOpenAPI for flutter for seemless banking via Kuda open pi
+</h4>
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+<hr>
 
-## Usage
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0;
+  <a href="#dart-installation">Installation</a> &#xa0; | &#xa0;
+  <a href="#sparkles-usage">Usage</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/giftbalogun" target="_blank">Author</a>
+</p>
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+<br>
 
-```dart
-const like = 'sample';
+## :dart: About
+
+Enable your product for local transactions with the KUDA Open API platform! With the KUDA Open APIs you can embed services unto your platform and connect your customers to a wide range of banking services.
+
+Before you proceed, ensure you have a [KUDA Business account](https://business.kuda.com/)!. You can link this account to your profile to get approved for live. 
+
+## :dart: Installation
+
+[PHP](https://php.net) 7.2+ and [Composer](https://getcomposer.org) are required.
+
+To get the latest version of KudaApiToken, simply require it
+
+```bash
+composer require giftbalogun/kudapaitoken
 ```
 
-## Additional information
+Or add the following line to the require block of your `composer.json` file.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```
+"repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/giftbalogun/kudaApiToken"
+    }
+],
+```
+
+and add This
+
+```
+"giftbalogun/kudapaitoken": "1.0.*"
+```
+
+You'll then need to run `composer install` or `composer update --prefer-dist` to download it and have the autoloader updated.
+
+Open your .env file and add your public key, secret key, merchant email and payment url like so:
+
+
+## :sparkles: Usage
+
+## :memo: License
+
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+
+Don't forget to [follow me on twitter](https://twitter.com/amdeone)!
+Made with :heart: by <a href="https://github.com/giftbalogun" target="_blank">Gift Balogun</a>
+
+&#xa0;
+
+<a href="#top">Back to top</a>
