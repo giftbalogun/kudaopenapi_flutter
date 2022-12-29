@@ -1,9 +1,5 @@
 <h1 align="center">KudaOpenAPI Integration in Flutter</h1>
 
-<p align="center">
-[![pub package](https://img.shields.io/pub/v/kudaopenapi.svg)](https://pub.dartlang.org/packages/kudaopenapi)
-</p>
-
 <!-- Status -->
 
 <h4 align="center">

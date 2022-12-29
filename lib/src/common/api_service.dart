@@ -1,12 +1,10 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService extends GetxService {
-
   static String? _baseurl;
   static String? _email;
   static String? _apikey;
@@ -48,7 +46,6 @@ class ApiService extends GetxService {
       // If the request was successful, parse the JSON response
       String data = json.decode(json.encode(response.body));
       // Return the token
-      //debugPrint('====> API Response: [${data}]');
       return data;
     } else {
       // If the request was not successful, throw an exception
@@ -74,12 +71,8 @@ class ApiService extends GetxService {
       }),
     };
     try {
-      http.Response response = await http.post(
-          Uri.parse(_baseurl!),
-          body: json.encode(body),
-          headers: headers);
-      //
-      debugPrint('====> API MakeRequest Body: [${json.decode(response.body)}]');
+      http.Response response = await http.post(Uri.parse(_baseurl!),
+          body: json.encode(body), headers: headers);
       return json.decode(response.body);
     } catch (e) {
       return {

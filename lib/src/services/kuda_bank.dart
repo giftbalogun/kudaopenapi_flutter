@@ -1,15 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
-
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:kudaopenapi/src/common/api_service.dart';
-import 'package:kudaopenapi/src/models/balance.dart';
 import 'package:kudaopenapi/src/models/bank_list.dart';
-import 'package:kudaopenapi/src/models/name_inquiry.dart';
-import 'package:kudaopenapi/src/models/send_kuda.dart';
 
 import '../constants/service_type.dart';
+import '../models/bank/balance.dart';
+import '../models/bank/name_inquiry.dart';
+import '../models/bank/send_kuda.dart';
 
 class KudaBank {
   // Define a function to get the bank list from the API
