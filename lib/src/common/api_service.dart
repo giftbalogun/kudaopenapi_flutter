@@ -1,17 +1,28 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService extends GetxService {
-  static const String noInternetMessage = 'Connection to API server failed due to internet connection';
+
+  static String? _publicKey;
+  static String? _email;
+  static String? _apikey;
+
+  static Future<void> initialize(String publicKey, email, apikey) async {
+    _publicKey = publicKey;
+    _email = email;
+    _apikey = apikey;
+  }
 
   // Define a function to get a token from the API
   Future<String> getToken() async {
     // Set the base URL for the API
-    String baseUrl = 'https://kuda-openapi.kuda.com/v2';
-    String email = 'blgnbalogun53@gmail.com';
-    String apikey = '#';
+    String baseUrl = _publicKey!;
+    String email = _email!;
+    String apikey = _apikey!;
 
     // Set the endpoint for the API call
     String endpoint = '/Account/GetToken';
@@ -45,7 +56,9 @@ class ApiService extends GetxService {
     }
   }
 
-  Future<Response> makeRequest(String action, Map<String, dynamic> payload, [String? requestRef]) async {
+  Future<Map<String, dynamic>> makeRequest(
+      String action, Map<String, dynamic> payload,
+      [String? requestRef]) async {
     // Set the headers for the HTTP request
     Map<String, String> headers = {
       'Authorization': 'Bearer ${await getToken()}',
@@ -61,13 +74,18 @@ class ApiService extends GetxService {
       }),
     };
     try {
-      http.Response response =
-          await http.post(Uri.parse('https://kuda-openapi.kuda.com/v2/'), body: json.encode(body), headers: headers);
-      // debugPrint('====> API MakeRequest statusCode: [${response.statusCode}]');
-      debugPrint('====> API MakeRequest Body: [${json.decode(response.body)['data']}]');
+      http.Response response = await http.post(
+          Uri.parse('https://kuda-openapi.kuda.com/v2/'),
+          body: json.encode(body),
+          headers: headers);
+      //
+      debugPrint('====> API MakeRequest Body: [${json.decode(response.body)}]');
       return json.decode(response.body);
     } catch (e) {
-      return const Response(statusCode: 1, statusText: noInternetMessage);
+      return {
+        'statusCode': 1,
+        'statusText': 'No internet connection',
+      };
     }
   }
 }

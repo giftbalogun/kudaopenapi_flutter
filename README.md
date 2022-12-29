@@ -1,19 +1,11 @@
-<h1 align="center">KudaOpenPAI Integration in Flutter</h1>
+<h1 align="center">KudaOpenAPI Integration in Flutter</h1>
 
-<p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/giftbalogun/kudaopenapi_flutter">
-
-  <img alt="Issues" src="https://img.shields.io/github/stars/giftbalogun/kudaopenapi_flutter?color=56BEB8">
-
-  <img alt="Star" src="	https://img.shields.io/github/stars/giftbalogun/kudaopenapi_flutter?color=56BEB8">
-
-  <img alt="License" src="https://img.shields.io/github/license/giftbalogun/kudaopenapi_flutter?style=plastic&color=56BEB8">
-</p>
+[![pub package](https://img.shields.io/pub/v/kudaopenapi.svg)](https://pub.dartlang.org/packages/kudaopenapi)
 
 <!-- Status -->
 
 <h4 align="center">
-	KudaOpenAPI for flutter for seemless banking via Kuda open pi
+	KudaOpenAPI for flutter for seemless banking via Kudaopenapi supports both Android and IOS.
 </h4>
 
 <hr>
@@ -30,50 +22,149 @@
 
 ## :dart: About
 
-Enable your product for local transactions with the KUDA Open API platform! With the KUDA Open APIs you can embed services unto your platform and connect your customers to a wide range of banking services.
+Enable your product for local transactions with the KUDAOpenAPI! With the KUDA Open APIs you can embed services unto your platform and connect your customers to a wide range of banking services.
 
-Before you proceed, ensure you have a [KUDA Business account](https://business.kuda.com/)!. You can link this account to your profile to get approved for live. 
+Before you proceed, ensure you have a [Kuda Business account](https://business.kuda.com/)!. You can link this account to your profile to get approved for live. 
 
 ## :dart: Installation
 
-[PHP](https://php.net) 7.2+ and [Composer](https://getcomposer.org) are required.
+To use this plugin, add `kudaopenapi` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
-To get the latest version of KudaApiToken, simply require it
+Then initialize the plugin preferably in the `initState` of your widget.
 
-```bash
-composer require giftbalogun/kudapaitoken
+``` dart
+import 'package:kudaopenapi/kudaopenapi.dart';
+class _MyHomePageState extends State<MyHomePage> {
+	var publicKey = 'TEST_OR_LIVE_URL';
+	var email = 'EMAIL';
+	var apikey = 'APIKEY';
+	@override
+	void initState() {
+		ApiService.initialize(publicKey, email, apikey);
+		super.initState();
+	}
+}
 ```
 
-Or add the following line to the require block of your `composer.json` file.
-
-```
-"repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/giftbalogun/kudaApiToken"
-    }
-],
-```
-
-and add This
-
-```
-"giftbalogun/kudapaitoken": "1.0.*"
-```
-
-You'll then need to run `composer install` or `composer update --prefer-dist` to download it and have the autoloader updated.
-
-Open your .env file and add your public key, secret key, merchant email and payment url like so:
-
+No other configuration required&mdash;the plugin works out of the box.
 
 ## :sparkles: Usage
+
+Make Request to the using this
+
+``` dart
+String trackingReference = Random().nextInt(100000).toString();
+
+Map<String, dynamic> data = {
+  'ClientAccountNumber': "00000000000",
+  'beneficiarybankCode': "000014",
+  'beneficiaryAccount': "000000000000",
+  'beneficiaryName': "GIFT IWOKURA BALOGUN",
+  'amount': "5000",
+  'narration': "Payment Flutter",
+  'nameEnquirySessionID': "00000000000000000",
+  'trackingReference': Random().nextInt(100000).toString(),
+  'senderName': "Gift Balogun",
+};
+
+String requestRef = Random().nextInt(100000).toString();
+```
+
+To get the list of banks with the kudaopenapi
+
+``` dart
+import 'package:kudaopenapi/kudaopenapi.dart';
+
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+        appBar: AppBar(title: const Text("Kuda Get Bank API")),
+        body: FutureBuilder<BankResponse>(
+          future: KudaBank().getBankList(requestRef),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.data!.data!.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: const Icon(Icons.list),
+                    trailing: Text(
+                      snapshot.data!.data!.data![index].bankCode.toString(),
+                      style: TextStyle(color: Colors.green, fontSize: 15),
+                    ),
+                    title: Text(
+                      snapshot.data!.data!.data![index].bankName.toString(),
+                    ),
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            return CircularProgressIndicator();
+          },
+        )
+      ),
+  );
+}
+```
+To get the details of an account
+
+``` dart
+import 'package:kudaopenapi/kudaopenapi.dart';
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+	void initState() {
+		ApiService.initialize(publicKey, email, apikey);
+		super.initState();
+	}
+  String trackingReference = Random().nextInt(100000).toString();
+
+  // Set the request data
+  Map<String, dynamic> data = {
+    'beneficiaryAccountNumber': '0000',
+    'beneficiaryBankCode': '000014',
+    'SenderTrackingReference': '',
+    'isRequestFromVirtualAccount': true,
+  };
+
+  String requestRef = Random().nextInt(100000).toString();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+			appBar: AppBar(title: const Text("Kuda Name Inquiry API")),
+      body: Center(
+        child: FutureBuilder(
+          future: KudaBank().name_inquiry(data, requestRef),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                var something = snapshot.data.data!;
+                return Text('sessionID: ${something.nameInquiry!.sessionID}');
+              }
+            } else {
+              return CircularProgressIndicator();
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 Don't forget to [follow me on twitter](https://twitter.com/amdeone)!
-Made with :heart: by <a href="https://github.com/giftbalogun" target="_blank">Gift Balogun</a>
+Made with :heart: by <a href="https://giftbalogun.name.ng" target="_blank">Gift Balogun</a>
 
 &#xa0;
 

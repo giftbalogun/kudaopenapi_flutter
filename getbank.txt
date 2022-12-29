@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches, prefer_const_constructors, unnecessary_null_comparison
+// ignore_for_file: empty_catches, prefer_const_constructors, unnecessary_null_comparison, depend_on_referenced_packages, unused_import
 import 'dart:convert';
 import 'dart:math';
 
@@ -10,6 +10,7 @@ import 'model/balance.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
+
   runApp(const MyApp());
 }
 
@@ -40,47 +41,69 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 	var publicKey = 'https://kuda-openapi.kuda.com/v2';
-	var email = '';
-	var apikey = '';
+	var email = 'blgnbalogun53@gmail.com';
+	var apikey = 'giqKtpNsS1yBHDhO08Um';
 
-  @override
+	@override
 	void initState() {
 		ApiService.initialize(publicKey, email, apikey);
 		super.initState();
 	}
   String trackingReference = Random().nextInt(100000).toString();
 
-    // Set the request data
+  // Set the request data
+  // Map<String, dynamic> data = {
+  //   'beneficiaryAccountNumber': '1413800836',
+  //   'beneficiaryBankCode': '000014',
+  //   'SenderTrackingReference': '',
+  //   'isRequestFromVirtualAccount': true,
+  // };
+
   Map<String, dynamic> data = {
-    'beneficiaryAccountNumber': '1413800836',
-    'beneficiaryBankCode': '000014',
-    'SenderTrackingReference': '',
-    'isRequestFromVirtualAccount': true,
+    'ClientAccountNumber': "3000002674", //Now Required
+    'beneficiarybankCode': "000014",
+    'beneficiaryAccount': "1413800836",
+    'beneficiaryName': "GIFT IWOKURA BALOGUN",
+    'amount': "5000",
+    'narration': "Payment Flutter",
+    'nameEnquirySessionID': "090267221229081108114857155014",
+    'trackingReference': Random().nextInt(100000).toString(),
+    'senderName': "Gift Balogun",
   };
 
   String requestRef = Random().nextInt(100000).toString();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-			appBar: AppBar(title: const Text("Kuda Name Inquiry API")),
-      body: Center(
-        child: FutureBuilder(
-          future: KudaBank().name_inquiry(data, requestRef),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                var something = snapshot.data.data!;
-                return Text('sessionID: ${something.nameInquiry!.sessionID}');
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(title: const Text("Kuda Get Bank API")),
+          body: FutureBuilder<BankResponse>(
+            future: KudaBank().getBankList(requestRef),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.data!.data!.length,
+                  itemBuilder: (context, index) {
+                    //return Text(snapshot.data!.data!.data![index].bankName.toString());
+                    return ListTile(
+                      leading: const Icon(Icons.list),
+                      trailing: Text(
+                        snapshot.data!.data!.data![index].bankCode.toString(),
+                        style: TextStyle(color: Colors.green, fontSize: 15),
+                      ),
+                      title: Text(
+                        snapshot.data!.data!.data![index].bankName.toString(),
+                      ),
+                    );
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
               }
-            } else {
               return CircularProgressIndicator();
-            }
-          },
-        ),
-      ),
+            },
+          )),
     );
   }
 }
@@ -124,7 +147,8 @@ class KudaBankClient {
     }
   }
 
-  Future<KudaResponse> getAdminBalance(Map<String, dynamic> data, String requestRef) async {
+  Future<KudaResponse> getAdminBalance(
+      Map<String, dynamic> data, String requestRef) async {
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${await getToken()}',

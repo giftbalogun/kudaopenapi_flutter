@@ -8,13 +8,15 @@ import 'package:get/get_connect/http/src/request/request.dart';
 
 class ApiInitialization extends GetxService {
   late final String appBaseUrl;
-  static const String noInternetMessage = 'Connection to API server failed due to internet connection';
+  static const String noInternetMessage =
+      'Connection to API server failed due to internet connection';
   final int timeoutInSeconds = 30;
 
   late String token;
   late Map<String, String> _mainHeaders;
 
-  Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers}) async {
+  Future<Response> getData(String uri,
+      {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     try {
       debugPrint('====> API Call: $uri\nHeader: $_mainHeaders');
       http.Response _response = await http
@@ -29,7 +31,8 @@ class ApiInitialization extends GetxService {
     }
   }
 
-  Future<Response> postData(String uri, dynamic body, {Map<String, String>? headers}) async {
+  Future<Response> postData(String uri, dynamic body,
+      {Map<String, String>? headers}) async {
     try {
       debugPrint('====> API Call: $uri\nHeader: $_mainHeaders');
       debugPrint('====> API Body: $body');
@@ -56,23 +59,34 @@ class ApiInitialization extends GetxService {
     Response _response = Response(
       body: _body ?? response.body,
       bodyString: response.body.toString(),
-      request: Request(headers: response.request!.headers, method: response.request!.method, url: response.request!.url),
+      request: Request(
+          headers: response.request!.headers,
+          method: response.request!.method,
+          url: response.request!.url),
       headers: response.headers,
       statusCode: response.statusCode,
       statusText: response.reasonPhrase,
     );
-    if (_response.statusCode != 200 && _response.body != null && _response.body is! String) {
+    if (_response.statusCode != 200 &&
+        _response.body != null &&
+        _response.body is! String) {
       if (_response.body.toString().startsWith('{errors: [{code:')) {
         // ErrorResponse _errorResponse = ErrorResponse.fromJson(_response.body);
-        _response =
-            Response(statusCode: _response.statusCode, body: _response.body, statusText: '_errorResponse.errors[0].message');
+        _response = Response(
+            statusCode: _response.statusCode,
+            body: _response.body,
+            statusText: '_errorResponse.errors[0].message');
       } else if (_response.body.toString().startsWith('{message')) {
-        _response = Response(statusCode: _response.statusCode, body: _response.body, statusText: _response.body['message']);
+        _response = Response(
+            statusCode: _response.statusCode,
+            body: _response.body,
+            statusText: _response.body['message']);
       }
     } else if (_response.statusCode != 200 && _response.body == null) {
       _response = const Response(statusCode: 0, statusText: noInternetMessage);
     }
-    debugPrint('====> API Response: [${_response.statusCode}] $uri\n${_response.body}');
+    debugPrint(
+        '====> API Response: [${_response.statusCode}] $uri\n${_response.body}');
     return _response;
   }
 }
