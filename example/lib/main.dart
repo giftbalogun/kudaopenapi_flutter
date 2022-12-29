@@ -39,13 +39,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-	var publicKey = 'https://kuda-openapi.kuda.com/v2';
+	var baseurl = 'https://kuda-openapi.kuda.com/v2';
 	var email = '';
 	var apikey = '';
 
   @override
 	void initState() {
-		ApiService.initialize(publicKey, email, apikey);
+		ApiService.initialize(baseurl, email, apikey);
 		super.initState();
 	}
   String trackingReference = Random().nextInt(100000).toString();

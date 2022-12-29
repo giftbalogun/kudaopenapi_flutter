@@ -1,6 +1,8 @@
 <h1 align="center">KudaOpenAPI Integration in Flutter</h1>
 
+<p align="center">
 [![pub package](https://img.shields.io/pub/v/kudaopenapi.svg)](https://pub.dartlang.org/packages/kudaopenapi)
+</p>
 
 <!-- Status -->
 
@@ -35,12 +37,12 @@ Then initialize the plugin preferably in the `initState` of your widget.
 ``` dart
 import 'package:kudaopenapi/kudaopenapi.dart';
 class _MyHomePageState extends State<MyHomePage> {
-	var publicKey = 'TEST_OR_LIVE_URL';
+	var baseurl = 'TEST_OR_LIVE_URL';
 	var email = 'EMAIL';
 	var apikey = 'APIKEY';
 	@override
 	void initState() {
-		ApiService.initialize(publicKey, email, apikey);
+		ApiService.initialize(baseurl, email, apikey);
 		super.initState();
 	}
 }
@@ -118,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
 	void initState() {
-		ApiService.initialize(publicKey, email, apikey);
+		ApiService.initialize(baseurl, email, apikey);
 		super.initState();
 	}
   String trackingReference = Random().nextInt(100000).toString();
@@ -161,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## :memo: License
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE) file.
 
 Don't forget to [follow me on twitter](https://twitter.com/amdeone)!
 Made with :heart: by <a href="https://giftbalogun.name.ng" target="_blank">Gift Balogun</a>

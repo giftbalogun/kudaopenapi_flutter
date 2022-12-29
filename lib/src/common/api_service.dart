@@ -7,12 +7,12 @@ import 'package:http/http.dart' as http;
 
 class ApiService extends GetxService {
 
-  static String? _publicKey;
+  static String? _baseurl;
   static String? _email;
   static String? _apikey;
 
-  static Future<void> initialize(String publicKey, email, apikey) async {
-    _publicKey = publicKey;
+  static Future<void> initialize(String baseurl, email, apikey) async {
+    _baseurl = baseurl;
     _email = email;
     _apikey = apikey;
   }
@@ -20,7 +20,7 @@ class ApiService extends GetxService {
   // Define a function to get a token from the API
   Future<String> getToken() async {
     // Set the base URL for the API
-    String baseUrl = _publicKey!;
+    String baseUrl = _baseurl!;
     String email = _email!;
     String apikey = _apikey!;
 
@@ -75,7 +75,7 @@ class ApiService extends GetxService {
     };
     try {
       http.Response response = await http.post(
-          Uri.parse('https://kuda-openapi.kuda.com/v2/'),
+          Uri.parse(_baseurl!),
           body: json.encode(body),
           headers: headers);
       //
