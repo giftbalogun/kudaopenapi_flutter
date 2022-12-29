@@ -113,17 +113,21 @@ To get the details of an account
 import 'package:kudaopenapi/kudaopenapi.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
+  var baseurl = '';
+  var email = '';
+  var apikey = '';
 
   @override
-	void initState() {
-		ApiService.initialize(baseurl, email, apikey);
-		super.initState();
-	}
+  void initState() {
+    ApiService.initialize(baseurl, email, apikey);
+    super.initState();
+  }
+
   String trackingReference = Random().nextInt(100000).toString();
 
   // Set the request data
   Map<String, dynamic> data = {
-    'beneficiaryAccountNumber': '0000',
+    'beneficiaryAccountNumber': '1413800836',
     'beneficiaryBankCode': '000014',
     'SenderTrackingReference': '',
     'isRequestFromVirtualAccount': true,
@@ -134,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-			appBar: AppBar(title: const Text("Kuda Name Inquiry API")),
+      appBar: AppBar(title: const Text("Kuda Name Inquiry API")),
       body: Center(
         child: FutureBuilder(
           future: KudaBank().name_inquiry(data, requestRef),
