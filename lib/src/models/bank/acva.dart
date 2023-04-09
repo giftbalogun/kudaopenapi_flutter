@@ -18,7 +18,7 @@ class Data {
   final bool? status;
   final String? message;
   final VirtualAccount? virtualAccount;
-    final RetrieveVirtualAccount? rvirtualAccount;
+  final RetrieveVirtualAccount? rvirtualAccount;
 
   Data({this.status, this.message, this.virtualAccount, this.rvirtualAccount});
 
@@ -27,8 +27,7 @@ class Data {
       status: json['Status'],
       message: json['Message'],
       virtualAccount: VirtualAccount.fromJson(json['Data']),
-            rvirtualAccount: RetrieveVirtualAccount.fromJson(json['Data']['Account']),
-
+      rvirtualAccount: RetrieveVirtualAccount.fromJson(json['Data']['Account']),
     );
   }
 }
@@ -46,7 +45,6 @@ class VirtualAccount {
     );
   }
 }
-
 
 //Retrieve Single Virtual Account
 class RetrieveVirtualAccount {
@@ -91,4 +89,3 @@ class RetrieveVirtualAccount {
     );
   }
 }
-

@@ -117,6 +117,7 @@ class DetailData {
     );
   }
 }
+
 //Get Information on a plain savings account
 class GetAllPlainSavings {
   final Data? data;
@@ -177,14 +178,14 @@ class AllDetailData {
 }
 
 //Manage a plain savings account
-class ManagePlainSaving{
+class ManagePlainSaving {
   final QueryData? data;
   final String? password;
 
   ManagePlainSaving({this.data, this.password});
 
   factory ManagePlainSaving.fromJson(Map<String, dynamic> json) {
-    return ManagePlainSaving (
+    return ManagePlainSaving(
       data: QueryData.fromJson(jsonDecode(json['data'])),
       password: json['password'] ?? 'password',
     );
@@ -261,21 +262,22 @@ class Log {
   final String? postingrecordtype;
   final String? postingtype;
 
-  Log(
-      {this.requesttime,
-      this.responsetime,
-      this.requestref,
-      this.financialdate,
-      this.realamount,
-      this.entrycode,
-      this.postingrecordtype,
-      this.postingtype,
-      this.responseref,
-      this.responsecode,
-      this.benaccnumber,
-      this.benbankcode,
-      this.amount,
-      this.servicetype,});
+  Log({
+    this.requesttime,
+    this.responsetime,
+    this.requestref,
+    this.financialdate,
+    this.realamount,
+    this.entrycode,
+    this.postingrecordtype,
+    this.postingtype,
+    this.responseref,
+    this.responsecode,
+    this.benaccnumber,
+    this.benbankcode,
+    this.amount,
+    this.servicetype,
+  });
 
   factory Log.fromJson(Map<String, dynamic> json) {
     return Log(

@@ -87,17 +87,18 @@ class DetailData {
   final String? isinterestearning;
   final String? creationdate;
 
-  DetailData(
-      {this.accountnumber,
-      this.targetamount,
-      this.duration,
-      this.name,
-      this.primaryaccountnumber,
-      this.frequency,
-      this.startdate,
-      this.isinterestearning,
-      this.creationdate,
-      this.trackingref,});
+  DetailData({
+    this.accountnumber,
+    this.targetamount,
+    this.duration,
+    this.name,
+    this.primaryaccountnumber,
+    this.frequency,
+    this.startdate,
+    this.isinterestearning,
+    this.creationdate,
+    this.trackingref,
+  });
 
   factory DetailData.fromJson(Map<String, dynamic> json) {
     return DetailData(
@@ -242,7 +243,8 @@ class RetrieveOpenClosedFlexibleSavings {
 
   RetrieveOpenClosedFlexibleSavings({this.data, this.password});
 
-  factory RetrieveOpenClosedFlexibleSavings.fromJson(Map<String, dynamic> json) {
+  factory RetrieveOpenClosedFlexibleSavings.fromJson(
+      Map<String, dynamic> json) {
     return RetrieveOpenClosedFlexibleSavings(
       data: GetAllData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
@@ -279,17 +281,18 @@ class RetrieveDetailData {
   final int? status;
   final String? islocked;
 
-  RetrieveDetailData(
-      {this.accountnumber,
-      this.targetamount,
-      this.duration,
-      this.name,
-      this.frequency,
-      this.amountsaved,
-      this.contribution,
-      this.interest,
-      this.status,
-      this.islocked,});
+  RetrieveDetailData({
+    this.accountnumber,
+    this.targetamount,
+    this.duration,
+    this.name,
+    this.frequency,
+    this.amountsaved,
+    this.contribution,
+    this.interest,
+    this.status,
+    this.islocked,
+  });
 
   factory RetrieveDetailData.fromJson(Map<String, dynamic> json) {
     return RetrieveDetailData(
@@ -303,21 +306,19 @@ class RetrieveDetailData {
       interest: json['Interest'],
       status: json['Status'],
       islocked: json['IsLocked'],
-
     );
   }
 }
 
-
 //Withdraw from a flexible savings account
-class WithdrawFlexibleSaving{
+class WithdrawFlexibleSaving {
   final QueryData? data;
   final String? password;
 
   WithdrawFlexibleSaving({this.data, this.password});
 
   factory WithdrawFlexibleSaving.fromJson(Map<String, dynamic> json) {
-    return WithdrawFlexibleSaving (
+    return WithdrawFlexibleSaving(
       data: QueryData.fromJson(jsonDecode(json['data'])),
       password: json['password'] ?? 'password',
     );
@@ -388,21 +389,22 @@ class Log {
   final String? postingrecordtype;
   final String? postingtype;
 
-  Log(
-      {this.requesttime,
-      this.responsetime,
-      this.requestref,
-      this.financialdate,
-      this.realamount,
-      this.entrycode,
-      this.postingrecordtype,
-      this.postingtype,
-      this.responseref,
-      this.responsecode,
-      this.benaccnumber,
-      this.benbankcode,
-      this.amount,
-      this.servicetype,});
+  Log({
+    this.requesttime,
+    this.responsetime,
+    this.requestref,
+    this.financialdate,
+    this.realamount,
+    this.entrycode,
+    this.postingrecordtype,
+    this.postingtype,
+    this.responseref,
+    this.responsecode,
+    this.benaccnumber,
+    this.benbankcode,
+    this.amount,
+    this.servicetype,
+  });
 
   factory Log.fromJson(Map<String, dynamic> json) {
     return Log(

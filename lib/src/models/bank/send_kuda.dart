@@ -42,8 +42,7 @@ class Data {
   }
 }
 
-
-class TransactionStatusQuery{
+class TransactionStatusQuery {
   final QueryData? data;
   final String? password;
 

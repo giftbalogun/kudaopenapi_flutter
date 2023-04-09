@@ -42,16 +42,17 @@ class Log {
   final String? amount;
   final String? servicetype;
 
-  Log(
-      {this.requesttime,
-      this.responsetime,
-      this.requestref,
-      this.responseref,
-      this.responsecode,
-      this.benaccnumber,
-      this.benbankcode,
-      this.amount,
-      this.servicetype,});
+  Log({
+    this.requesttime,
+    this.responsetime,
+    this.requestref,
+    this.responseref,
+    this.responsecode,
+    this.benaccnumber,
+    this.benbankcode,
+    this.amount,
+    this.servicetype,
+  });
 
   factory Log.fromJson(Map<String, dynamic> json) {
     return Log(

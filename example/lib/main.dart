@@ -56,38 +56,41 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("KudaOpenApi")),
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            FutureBuilder(
-              future: KudaBank().getadminbalance(data, requestRef),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else {
-                    var something = snapshot.data.data!;
-                    return Column(
-                      children: [
-                        Text('AccountNumber: ${something!.balance!.availableBalance!}'),
-                      ],
-                    );
-                  }
+      appBar: AppBar(title: const Text("KudaOpenApi")),
+      body: Center(
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          FutureBuilder(
+            future: KudaBank().getadminbalance(data, requestRef),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
                 } else {
-                  return CircularProgressIndicator();
+                  var something = snapshot.data.data!;
+                  return Column(
+                    children: [
+                      Text(
+                          'AccountNumber: ${something!.balance!.availableBalance!}'),
+                    ],
+                  );
                 }
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SecondRoute()),
-                );
-              },
-              child: const Text('Go back!'),
-            ),
-          ]),
-        ),);
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SecondRoute()),
+              );
+            },
+            child: const Text('Go back!'),
+          ),
+        ]),
+      ),
+    );
   }
 }
