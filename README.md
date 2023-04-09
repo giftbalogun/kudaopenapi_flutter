@@ -3,13 +3,13 @@
 <!-- Status -->
 
 <h4 align="center">
-	KudaOpenAPI for flutter for seemless banking via Kudaopenapi supports both Android and IOS.
+	KudaOpenAPI for flutter for seemless banking via Kudaopenapi.
 </h4>
 
 <hr>
 
 <p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0;
+  <a href="#dart-getting-started">Getting Started</a> &#xa0; | &#xa0;
   <a href="#dart-installation">Installation</a> &#xa0; | &#xa0;
   <a href="#sparkles-usage">Usage</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
@@ -18,11 +18,13 @@
 
 <br>
 
-## :dart: About
+## :dart: Getting Started
 
-Enable your product for local transactions with the KUDAOpenAPI! With the KUDA Open APIs you can embed services unto your platform and connect your customers to a wide range of banking services.
+Enable your product for local transactions with the KudaOpenAPI! With the KUDA Open APIs you can embed services unto your platform and connect your customers to a wide range of banking services.
 
 Before you proceed, ensure you have a [Kuda Business account](https://business.kuda.com/)!. You can link this account to your profile to get approved for live. 
+
+Get your token from the [Developer Dashboard](https://developer.kuda.com/)!.
 
 ## :dart: Installation
 
@@ -32,6 +34,7 @@ Then initialize the plugin preferably in the `initState` of your widget.
 
 ``` dart
 import 'package:kudaopenapi/kudaopenapi.dart';
+
 class _MyHomePageState extends State<MyHomePage> {
 	var baseurl = 'TEST_OR_LIVE_URL';
 	var email = 'EMAIL';
@@ -48,7 +51,7 @@ No other configuration required&mdash;the plugin works out of the box.
 
 ## :sparkles: Usage
 
-Make Request to the using this
+Make Request to the API using this
 
 ``` dart
 String trackingReference = Random().nextInt(100000).toString();
@@ -63,7 +66,7 @@ Map<String, dynamic> data = {
   'nameEnquirySessionID': "00000000000000000",
   'trackingReference': Random().nextInt(100000).toString(),
   'senderName': "Gift Balogun",
-};
+}; //Format for sending data through
 
 String requestRef = Random().nextInt(100000).toString();
 ```
@@ -107,6 +110,7 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
 To get the details of an account
 
 ``` dart
@@ -161,12 +165,60 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+To get retrieve virtual account details with the kudaopenapi
+
+``` dart
+import 'package:kudaopenapi/kudaopenapi.dart';
+
+@override
+Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: const Text("KudaOpenApi-Retrieve")),
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            FutureBuilder(
+              future: KudaBank().retrieve_virtual_account(data, requestRef),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    var something = snapshot.data.data!;
+                    return Column(
+                      children: [
+                        Text('AccountNumber: ${something!.rvirtualAccount!.accountnumber!}'),
+                        Text('Email.: ${something!.rvirtualAccount!.email}'),
+                        Text('Phone Number.: ${something!.rvirtualAccount!.phonenumber}'),
+                        Text('AccountName.: ${something!.rvirtualAccount!.accountname}'),
+                        Text('Fullname.: ${something!.rvirtualAccount!.firstname}'),
+                        Text('Tracking Ref.: ${something!.rvirtualAccount!.trackingref}'),
+                      ],
+                    );
+                  }
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
+          ]
+        ),
+      ),
+    );
+  }
+}
+```
+
 ## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE) file.
 
-Don't forget to [follow me on twitter](https://twitter.com/amdeone)!
-Made with :heart: by <a href="https://giftbalogun.name.ng" target="_blank">Gift Balogun</a>
+## Social Presense
+Follow me on social media
+[Medium](https://medium.com/@giftbalogun)!
+[Twitter](https://twitter.com/am_de_one)!
+[Instagram](https://www.instagram.com/am_thd_one/)!
+[LinkedIn](https://www.linkedin.com/in/gift-balogun-907103160/)!
+[Porfolio](https://giftbalogun.name.ng/)!
 
 &#xa0;
 

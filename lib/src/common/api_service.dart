@@ -53,9 +53,7 @@ class ApiService extends GetxService {
     }
   }
 
-  Future<Map<String, dynamic>> makeRequest(
-      String action, Map<String, dynamic> payload,
-      [String? requestRef]) async {
+  Future<Map<String, dynamic>> makeRequest(String action, Map<String, dynamic> payload, [String? requestRef]) async {
     // Set the headers for the HTTP request
     Map<String, String> headers = {
       'Authorization': 'Bearer ${await getToken()}',
@@ -71,8 +69,7 @@ class ApiService extends GetxService {
       }),
     };
     try {
-      http.Response response = await http.post(Uri.parse(_baseurl!),
-          body: json.encode(body), headers: headers);
+      http.Response response = await http.post(Uri.parse(_baseurl!), body: json.encode(body), headers: headers);
       return json.decode(response.body);
     } catch (e) {
       return {

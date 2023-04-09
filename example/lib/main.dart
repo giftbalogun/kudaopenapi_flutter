@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:kudaopenapi/kudaopenapi.dart';
 
+import 'second.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -32,9 +34,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var baseurl = '';
-  var email = '';
   var apikey = '';
+  var email = '';
+  var baseurl = '';
 
   @override
   void initState() {
@@ -46,10 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Set the request data
   Map<String, dynamic> data = {
-    'beneficiaryAccountNumber': '1413800836',
-    'beneficiaryBankCode': '000014',
-    'SenderTrackingReference': '',
-    'isRequestFromVirtualAccount': true,
+    'trackingReference': '000000000',
   };
 
   String requestRef = Random().nextInt(100000).toString();
@@ -57,24 +56,38 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Kuda Name Inquiry API")),
-      body: Center(
-        child: FutureBuilder(
-          future: KudaBank().name_inquiry(data, requestRef),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                var something = snapshot.data.data!;
-                return Text('sessionID: ${something.nameInquiry!.sessionID}');
-              }
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
-      ),
-    );
+        appBar: AppBar(title: const Text("KudaOpenApi")),
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            FutureBuilder(
+              future: KudaBank().getadminbalance(data, requestRef),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    var something = snapshot.data.data!;
+                    return Column(
+                      children: [
+                        Text('AccountNumber: ${something!.balance!.availableBalance!}'),
+                      ],
+                    );
+                  }
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecondRoute()),
+                );
+              },
+              child: const Text('Go back!'),
+            ),
+          ]),
+        ),);
   }
 }

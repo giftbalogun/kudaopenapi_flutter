@@ -35,8 +35,7 @@ class BalanceData {
   final double? availableBalance;
   final double? withdrawableBalance;
 
-  BalanceData(
-      {this.ledgerBalance, this.availableBalance, this.withdrawableBalance});
+  BalanceData({this.ledgerBalance, this.availableBalance, this.withdrawableBalance});
 
   factory BalanceData.fromJson(Map<String, dynamic> json) {
     return BalanceData(

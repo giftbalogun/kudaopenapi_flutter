@@ -1,6 +1,6 @@
 # example
 
-A new Flutter project.
+A flutter project to Showcase how the KudaOpenAPI works.
 
 ## Getting Started
 
