@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class NameInquiryResponse {
   final bool? status;
   final String? message;

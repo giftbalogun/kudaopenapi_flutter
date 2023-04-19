@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class BankAccount {
   final String message;
   final bool status;
