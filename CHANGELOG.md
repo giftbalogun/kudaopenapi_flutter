@@ -43,3 +43,9 @@
 -Added Kuda Gift Cards Model
 -Updated all libraries
 
+## 0.0.8
+-Updated README.md
+-Updated all library files
+-Code Fixes
+-Updated API Calls
+

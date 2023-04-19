@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var apikey = '';
   var email = '';
-  var baseurl = '';
+  var baseurl = 'https://kuda-openapi.kuda.com/v2.1';
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Set the request data
   Map<String, dynamic> data = {
-    'trackingReference': '000000000',
+    //'trackingReference': '000000000',
   };
 
   String requestRef = Random().nextInt(100000).toString();
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           FutureBuilder(
-            future: KudaBank().getadminbalance(data, requestRef),
+            future: KudaBank().getadminbalance(requestRef),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
@@ -70,8 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   var something = snapshot.data.data!;
                   return Column(
                     children: [
-                      Text(
-                          'AccountNumber: ${something!.balance!.availableBalance!}'),
+                      Text('AccountNumber: ${something!.availableBalance!}'),
                     ],
                   );
                 }

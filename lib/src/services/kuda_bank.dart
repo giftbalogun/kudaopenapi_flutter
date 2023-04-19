@@ -91,16 +91,15 @@ class KudaBank {
 
   // Kuda GET BUSINESS ACCOUNT BUSINESS
   //https://kudabank.gitbook.io/kudabank/check-admin-account-balance
-  Future<BalaceResponse> getadminbalance(Map<String, dynamic> payload,
-      [String? requestRef]) async {
+  Future<BankAccount> getadminbalance([String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService().makeRequest(
-        ServiceTypes.ADMIN_RETRIEVE_MAIN_ACCOUNT_BALANCE, payload, requestRef);
-
+        ServiceTypes.ADMIN_RETRIEVE_MAIN_ACCOUNT_BALANCE, {}, requestRef);
     // Create a new instance of the `KudaResponse` class
-    var kudaResponse = BalaceResponse.fromJson(response);
+    var kudaResponse = BankAccount.fromJson(response);
 
     // Return the `KudaResponse` instance
+
     return kudaResponse;
   }
 
@@ -123,7 +122,7 @@ class KudaBank {
 
   // // Kuda GET VIRTUAL ACCOUNT BALANCE
   // //https://kudabank.gitbook.io/kudabank/check-virtual-account-balance
-  Future<BalaceResponse> retrieve_virtual_account_balance(
+  Future<BankAccount> retrieve_virtual_account_balance(
       Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
@@ -131,7 +130,7 @@ class KudaBank {
         ServiceTypes.RETRIEVE_VIRTUAL_ACCOUNT_BALANCE, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
-    var kudaResponse = BalaceResponse.fromJson(response);
+    var kudaResponse = BankAccount.fromJson(response);
 
     // Return the `KudaResponse` instance
     return kudaResponse;

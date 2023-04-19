@@ -77,7 +77,7 @@ To get the list of banks with the kudaopenapi
 import 'package:kudaopenapi/kudaopenapi.dart';
 
 @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
   return MaterialApp(
     home: Scaffold(
         appBar: AppBar(title: const Text("Kuda Get Bank API")),
@@ -86,16 +86,16 @@ Widget build(BuildContext context) {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                itemCount: snapshot.data!.data!.data!.length,
+                itemCount: snapshot.data!.data!.banks.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const Icon(Icons.list),
                     trailing: Text(
-                      snapshot.data!.data!.data![index].bankCode.toString(),
+                      snapshot.data!.data!.banks[index].bankCode.toString(),
                       style: TextStyle(color: Colors.green, fontSize: 15),
                     ),
                     title: Text(
-                      snapshot.data!.data!.data![index].bankName.toString(),
+                      snapshot.data!.data!.banks[index].bankName.toString(),
                     ),
                   );
                 },
@@ -206,6 +206,48 @@ Widget build(BuildContext context) {
     );
   }
 }
+```
+
+To get list of GiftCards Offered by Kuda
+
+```dart
+Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Gift Cards')),
+      body: FutureBuilder<GiftCardResponse>(
+        future: KudaGiftCard().list_gift_cards(requestRef),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+            
+          } else if (!snapshot.hasData || snapshot.data!.data.giftItems.isEmpty) {
+            return Center(child: Text('No gift cards available'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.data.giftItems.length,
+              itemBuilder: (context, index) {
+                final giftCard = snapshot.data!.data.giftItems[index];
+                return ListTile(
+                  leading: Image.network(giftCard.image),
+                  title: Text(giftCard.package),
+                  subtitle: Text('Category: ${giftCard.category}'),
+                  trailing: Text(
+                    'Country: ${giftCard.countries.length}',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onTap: () {
+                    // Handle gift card item tap
+                  },
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 ```
 
 ## :memo: License

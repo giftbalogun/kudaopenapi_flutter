@@ -1,48 +1,41 @@
 import 'dart:convert';
 
-class BalaceResponse {
-  final BData? data;
-  final String? password;
+class BankAccount {
+  final String message;
+  final bool status;
+  final AccountData data;
 
-  BalaceResponse({this.data, this.password});
+  BankAccount({
+    required this.message,
+    required this.status,
+    required this.data,
+  });
 
-  factory BalaceResponse.fromJson(Map<String, dynamic> json) {
-    return BalaceResponse(
-      data: BData.fromJson(jsonDecode(json['data'])),
-      password: json['password'] as String,
+  factory BankAccount.fromJson(Map<String, dynamic> json) {
+    return BankAccount(
+      message: json['message'],
+      status: json['status'],
+      data: AccountData.fromJson((json['data'])),
     );
   }
 }
 
-class BData {
-  final bool? status;
-  final String? message;
-  final BalanceData? balance;
+class AccountData {
+  final double ledgerBalance;
+  final int availableBalance;
+  final int withdrawableBalance;
 
-  BData({this.status, this.message, this.balance});
+  AccountData({
+    required this.ledgerBalance,
+    required this.availableBalance,
+    required this.withdrawableBalance,
+  });
 
-  factory BData.fromJson(Map<String, dynamic> json) {
-    return BData(
-      status: json['Status'],
-      message: json['Message'],
-      balance: BalanceData.fromJson(json['Data']),
-    );
-  }
-}
-
-class BalanceData {
-  final double? ledgerBalance;
-  final double? availableBalance;
-  final double? withdrawableBalance;
-
-  BalanceData(
-      {this.ledgerBalance, this.availableBalance, this.withdrawableBalance});
-
-  factory BalanceData.fromJson(Map<String, dynamic> json) {
-    return BalanceData(
-      ledgerBalance: json['LedgerBalance'],
-      availableBalance: json['AvailableBalance'],
-      withdrawableBalance: json['WithdrawableBalance'],
+  factory AccountData.fromJson(Map<String, dynamic> json) {
+    return AccountData(
+      ledgerBalance: json['ledgerBalance'].toDouble() ?? '99.0',
+      availableBalance: json['availableBalance'] ?? '88',
+      withdrawableBalance: json['withdrawableBalance'] ?? '99',
     );
   }
 }

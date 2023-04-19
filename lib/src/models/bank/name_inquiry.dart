@@ -1,28 +1,14 @@
 import 'dart:convert';
 
 class NameInquiryResponse {
-  final NData? data;
-  final String? password;
-
-  NameInquiryResponse({this.data, this.password});
-
-  factory NameInquiryResponse.fromJson(Map<String, dynamic> json) {
-    return NameInquiryResponse(
-      data: NData.fromJson(jsonDecode(json['data'])),
-      password: json['password'] as String,
-    );
-  }
-}
-
-class NData {
   final bool? status;
   final String? message;
   final NameInquiry? nameInquiry;
 
-  NData({this.status, this.message, this.nameInquiry});
+  NameInquiryResponse({this.status, this.message, this.nameInquiry});
 
-  factory NData.fromJson(Map<String, dynamic> json) {
-    return NData(
+  factory NameInquiryResponse.fromJson(Map<String, dynamic> json) {
+    return NameInquiryResponse(
       status: json['Status'],
       message: json['Message'],
       nameInquiry: NameInquiry.fromJson(json['Data']),

@@ -46,6 +46,7 @@ class ApiService extends GetxService {
       // If the request was successful, parse the JSON response
       String data = json.decode(json.encode(response.body));
       // Return the token
+
       return data;
     } else {
       // If the request was not successful, throw an exception
@@ -64,12 +65,11 @@ class ApiService extends GetxService {
 
     // Set the request body
     Map<String, dynamic> body = {
-      'data': json.encode({
-        'serviceType': action,
-        'requestRef': requestRef,
-        'data': payload,
-      }),
+      'servicetype': action,
+      'requestref': requestRef,
+      'data': payload,
     };
+
     try {
       http.Response response = await http.post(Uri.parse(_baseurl!),
           body: json.encode(body), headers: headers);
