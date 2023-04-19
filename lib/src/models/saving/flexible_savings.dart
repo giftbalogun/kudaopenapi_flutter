@@ -3,42 +3,42 @@
 import 'dart:convert';
 
 class FlexibleSavings {
-  final Data? data;
+  final FData? data;
   final String? password;
 
   FlexibleSavings({this.data, this.password});
 
   factory FlexibleSavings.fromJson(Map<String, dynamic> json) {
     return FlexibleSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: FData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class Data {
+class FData {
   final bool? status;
   final String? message;
-  final BalanceData? balance;
+  final FBalanceData? balance;
 
-  Data({this.status, this.message, this.balance});
+  FData({this.status, this.message, this.balance});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory FData.fromJson(Map<String, dynamic> json) {
+    return FData(
       status: json['Status'],
       message: json['Message'],
-      balance: BalanceData.fromJson(json['Data']),
+      balance: FBalanceData.fromJson(json['Data']),
     );
   }
 }
 
-class BalanceData {
+class FBalanceData {
   final double? accountnumber;
 
-  BalanceData({this.accountnumber});
+  FBalanceData({this.accountnumber});
 
-  factory BalanceData.fromJson(Map<String, dynamic> json) {
-    return BalanceData(
+  factory FBalanceData.fromJson(Map<String, dynamic> json) {
+    return FBalanceData(
       accountnumber: json['AccountNumber'],
     );
   }
@@ -46,14 +46,14 @@ class BalanceData {
 
 //Get information on a flexible savings account
 class GetFlexibleSavings {
-  final Data? data;
+  final FData? data;
   final String? password;
 
   GetFlexibleSavings({this.data, this.password});
 
   factory GetFlexibleSavings.fromJson(Map<String, dynamic> json) {
     return GetFlexibleSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: FData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
@@ -312,28 +312,28 @@ class RetrieveDetailData {
 
 //Withdraw from a flexible savings account
 class WithdrawFlexibleSaving {
-  final QueryData? data;
+  final FQueryData? data;
   final String? password;
 
   WithdrawFlexibleSaving({this.data, this.password});
 
   factory WithdrawFlexibleSaving.fromJson(Map<String, dynamic> json) {
     return WithdrawFlexibleSaving(
-      data: QueryData.fromJson(jsonDecode(json['data'])),
+      data: FQueryData.fromJson(jsonDecode(json['data'])),
       password: json['password'] ?? 'password',
     );
   }
 }
 
-class QueryData {
+class FQueryData {
   final String? Data;
 
-  QueryData({
+  FQueryData({
     this.Data,
   });
 
-  factory QueryData.fromJson(Map<String, dynamic> json) {
-    return QueryData(
+  factory FQueryData.fromJson(Map<String, dynamic> json) {
+    return FQueryData(
       Data: json['Data']['ResponseCode'] ?? 'data may be null',
     );
   }
@@ -341,14 +341,14 @@ class QueryData {
 
 //View all transactions on a flexible savings account
 class TransactionFlexibleSavings {
-  final Data? data;
+  final FData? data;
   final String? password;
 
   TransactionFlexibleSavings({this.data, this.password});
 
   factory TransactionFlexibleSavings.fromJson(Map<String, dynamic> json) {
     return TransactionFlexibleSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: FData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }

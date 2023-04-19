@@ -71,4 +71,17 @@ class ServiceTypes {
   static const BILL_TSQ = 'BILL_TSQ';
   static const ADMIN_GET_PURCHADED_BILLS = 'ADMIN_GET_PURCHADED_BILLS';
   static const GET_PURCHADED_BILLS = 'GET_PURCHADED_BILLS';
+
+  //Kuda Card
+  static const REQUEST_CARD = 'REQUEST_CARD';
+  static const GET_CUSTOMER_CARDS = 'GET_CUSTOMER_CARDS';
+  static const ACTIVATE_CARD = 'ACTIVATE_CARD';
+  static const DEACTIVATE_CARD = 'DEACTIVATE_CARD';
+  static const MANAGE_CARD_TRANSACTION_LIMIT = 'MANAGE_CARD_TRANSACTION_LIMIT';
+  static const CHANGE_CARD_PIN = 'CHANGE_CARD_PIN';
+  static const BLOCK_CARD = 'BLOCK_CARD';
+  static const UNBLOCK_CARD = 'UNBLOCK_CARD';
+
+  //Kuda Gift Card
+  static const GET_GIFT_CARD = 'GET_GIFT_CARD';
 }

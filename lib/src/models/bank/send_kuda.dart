@@ -3,27 +3,27 @@
 import 'dart:convert';
 
 class SendMoneyKuda {
-  final Data? data;
+  final SData? data;
   final String? password;
 
   SendMoneyKuda({this.data, this.password});
 
   factory SendMoneyKuda.fromJson(Map<String, dynamic> json) {
     return SendMoneyKuda(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: SData.fromJson(jsonDecode(json['data'])),
       password: json['password'] ?? 'password',
     );
   }
 }
 
-class Data {
+class SData {
   final String? requestReference;
   final String? transactionReference;
   final String? responseCode;
   final bool? status;
   final String? message;
 
-  Data({
+  SData({
     this.requestReference,
     this.transactionReference,
     this.responseCode,
@@ -31,8 +31,8 @@ class Data {
     this.message,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory SData.fromJson(Map<String, dynamic> json) {
+    return SData(
       requestReference: json['RequestReference'] ?? 'request ref',
       transactionReference: json['TransactionReference'] ?? 'trans ref',
       responseCode: json['ResponseCode'] ?? 'response code',

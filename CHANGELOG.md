@@ -32,3 +32,14 @@
 -Added Documentations
 -Updated kudaopenapi.dart
 -added kuda savings
+
+## 0.0.7
+-Updated Service Type
+-Added Kuda_Card.dart
+-Updated Model
+-Updated Documentation
+-Code Fixes
+-Added Kuda Gift Cards Service
+-Added Kuda Gift Cards Model
+-Updated all libraries
+

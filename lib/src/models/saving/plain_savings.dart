@@ -3,42 +3,42 @@
 import 'dart:convert';
 
 class PlainSavings {
-  final Data? data;
+  final PData? data;
   final String? password;
 
   PlainSavings({this.data, this.password});
 
   factory PlainSavings.fromJson(Map<String, dynamic> json) {
     return PlainSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: PData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class Data {
+class PData {
   final bool? status;
   final String? message;
-  final BalanceData? balance;
+  final PBalanceData? balance;
 
-  Data({this.status, this.message, this.balance});
+  PData({this.status, this.message, this.balance});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory PData.fromJson(Map<String, dynamic> json) {
+    return PData(
       status: json['Status'],
       message: json['Message'],
-      balance: BalanceData.fromJson(json['Data']),
+      balance: PBalanceData.fromJson(json['Data']),
     );
   }
 }
 
-class BalanceData {
+class PBalanceData {
   final double? accountnumber;
 
-  BalanceData({this.accountnumber});
+  PBalanceData({this.accountnumber});
 
-  factory BalanceData.fromJson(Map<String, dynamic> json) {
-    return BalanceData(
+  factory PBalanceData.fromJson(Map<String, dynamic> json) {
+    return PBalanceData(
       accountnumber: json['AccountNumber'],
     );
   }
@@ -46,36 +46,36 @@ class BalanceData {
 
 //Get Information on a plain savings account
 class GetPlainSavings {
-  final Data? data;
+  final PData? data;
   final String? password;
 
   GetPlainSavings({this.data, this.password});
 
   factory GetPlainSavings.fromJson(Map<String, dynamic> json) {
     return GetPlainSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: PData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class GetData {
+class PGePTData {
   final bool? status;
   final String? message;
-  final DetailData? detail;
+  final PDetailData? detail;
 
-  GetData({this.status, this.message, this.detail});
+  PGePTData({this.status, this.message, this.detail});
 
-  factory GetData.fromJson(Map<String, dynamic> json) {
-    return GetData(
+  factory PGePTData.fromJson(Map<String, dynamic> json) {
+    return PGePTData(
       status: json['Status'],
       message: json['Message'],
-      detail: DetailData.fromJson(json['Data']),
+      detail: PDetailData.fromJson(json['Data']),
     );
   }
 }
 
-class DetailData {
+class PDetailData {
   final String? accountnumber;
   final String? savedamount;
   final String? lastamountsaved;
@@ -88,7 +88,7 @@ class DetailData {
   final String? isinterestearning;
   final String? interest;
 
-  DetailData(
+  PDetailData(
       {this.accountnumber,
       this.savedamount,
       this.lastamountsaved,
@@ -101,8 +101,8 @@ class DetailData {
       this.isinterestearning,
       this.interest});
 
-  factory DetailData.fromJson(Map<String, dynamic> json) {
-    return DetailData(
+  factory PDetailData.fromJson(Map<String, dynamic> json) {
+    return PDetailData(
       accountnumber: json['AccountNumber'],
       savedamount: json['AmountSaved'],
       lastamountsaved: json['LastAmountSaved'],
@@ -120,36 +120,36 @@ class DetailData {
 
 //Get Information on a plain savings account
 class GetAllPlainSavings {
-  final Data? data;
+  final PData? data;
   final String? password;
 
   GetAllPlainSavings({this.data, this.password});
 
   factory GetAllPlainSavings.fromJson(Map<String, dynamic> json) {
     return GetAllPlainSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: PData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class GetAllData {
+class PGetAllData {
   final bool? status;
   final String? message;
-  final DetailData? detail;
+  final PDetailData? detail;
 
-  GetAllData({this.status, this.message, this.detail});
+  PGetAllData({this.status, this.message, this.detail});
 
-  factory GetAllData.fromJson(Map<String, dynamic> json) {
-    return GetAllData(
+  factory PGetAllData.fromJson(Map<String, dynamic> json) {
+    return PGetAllData(
       status: json['Status'],
       message: json['Message'],
-      detail: DetailData.fromJson(json['Data']),
+      detail: PDetailData.fromJson(json['Data']),
     );
   }
 }
 
-class AllDetailData {
+class PAllDetailData {
   final String? accountnumber;
   final double? savedamount;
   final int? status;
@@ -157,7 +157,7 @@ class AllDetailData {
   final String? islocked;
   final double? interest;
 
-  AllDetailData(
+  PAllDetailData(
       {this.accountnumber,
       this.savedamount,
       this.status,
@@ -165,8 +165,8 @@ class AllDetailData {
       this.islocked,
       this.interest});
 
-  factory AllDetailData.fromJson(Map<String, dynamic> json) {
-    return AllDetailData(
+  factory PAllDetailData.fromJson(Map<String, dynamic> json) {
+    return PAllDetailData(
       accountnumber: json['AccountNumber'],
       savedamount: json['AmountSaved'],
       status: json['Status'],
@@ -179,32 +179,32 @@ class AllDetailData {
 
 //Manage a plain savings account
 class ManagePlainSaving {
-  final QueryData? data;
+  final PQueryData? data;
   final String? password;
 
   ManagePlainSaving({this.data, this.password});
 
   factory ManagePlainSaving.fromJson(Map<String, dynamic> json) {
     return ManagePlainSaving(
-      data: QueryData.fromJson(jsonDecode(json['data'])),
+      data: PQueryData.fromJson(jsonDecode(json['data'])),
       password: json['password'] ?? 'password',
     );
   }
 }
 
-class QueryData {
+class PQueryData {
   final String? Data;
   final bool? Status;
   final String? Message;
 
-  QueryData({
+  PQueryData({
     this.Data,
     this.Status,
     this.Message,
   });
 
-  factory QueryData.fromJson(Map<String, dynamic> json) {
-    return QueryData(
+  factory PQueryData.fromJson(Map<String, dynamic> json) {
+    return PQueryData(
       Data: json['Data'] ?? 'data may be null',
       Status: json['Status'] ?? 'unknown',
       Message: json['Message'] ?? 'message',
@@ -214,39 +214,39 @@ class QueryData {
 
 //View all transactions on a plain savings account
 class TransactionPlainSavings {
-  final Data? data;
+  final PData? data;
   final String? password;
 
   TransactionPlainSavings({this.data, this.password});
 
   factory TransactionPlainSavings.fromJson(Map<String, dynamic> json) {
     return TransactionPlainSavings(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: PData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class TData {
+class PTData {
   final bool? status;
   final String? message;
-  final Log? plainsaving;
+  final PLog? plainsaving;
   final int? total;
 
-  TData({this.status, this.message, this.plainsaving, this.total});
+  PTData({this.status, this.message, this.plainsaving, this.total});
 
-  factory TData.fromJson(Map<String, dynamic> json) {
-    return TData(
+  factory PTData.fromJson(Map<String, dynamic> json) {
+    return PTData(
       status: json['Status'],
       message: json['Message'],
-      plainsaving: Log.fromJson(json['Data']['PostingsHistory']),
+      plainsaving: PLog.fromJson(json['Data']['PostingsHistory']),
       total: json['Data']['TotalCount'],
     );
   }
 }
 
 //Retrieve Single Virtual Account
-class Log {
+class PLog {
   final String? requesttime;
   final String? responsetime;
   final String? requestref;
@@ -262,7 +262,7 @@ class Log {
   final String? postingrecordtype;
   final String? postingtype;
 
-  Log({
+  PLog({
     this.requesttime,
     this.responsetime,
     this.requestref,
@@ -279,8 +279,8 @@ class Log {
     this.servicetype,
   });
 
-  factory Log.fromJson(Map<String, dynamic> json) {
-    return Log(
+  factory PLog.fromJson(Map<String, dynamic> json) {
+    return PLog(
       requesttime: json['ReferenceNumber'] ?? 'AccountNumer',
       responsetime: json['ReversalReferenceNumber'],
       requestref: json['AccountNumber'],

@@ -1,28 +1,28 @@
 import 'dart:convert';
 
 class BalaceResponse {
-  final Data? data;
+  final BData? data;
   final String? password;
 
   BalaceResponse({this.data, this.password});
 
   factory BalaceResponse.fromJson(Map<String, dynamic> json) {
     return BalaceResponse(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: BData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class Data {
+class BData {
   final bool? status;
   final String? message;
   final BalanceData? balance;
 
-  Data({this.status, this.message, this.balance});
+  BData({this.status, this.message, this.balance});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory BData.fromJson(Map<String, dynamic> json) {
+    return BData(
       status: json['Status'],
       message: json['Message'],
       balance: BalanceData.fromJson(json['Data']),

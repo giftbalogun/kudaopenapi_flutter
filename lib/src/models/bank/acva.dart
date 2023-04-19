@@ -1,29 +1,29 @@
 import 'dart:convert';
 
 class ACVAResponse {
-  final Data? data;
+  final AData? data;
   final String? password;
 
   ACVAResponse({this.data, this.password});
 
   factory ACVAResponse.fromJson(Map<String, dynamic> json) {
     return ACVAResponse(
-      data: Data.fromJson(jsonDecode(json['data'])),
+      data: AData.fromJson(jsonDecode(json['data'])),
       password: json['password'] as String,
     );
   }
 }
 
-class Data {
+class AData {
   final bool? status;
   final String? message;
   final VirtualAccount? virtualAccount;
   final RetrieveVirtualAccount? rvirtualAccount;
 
-  Data({this.status, this.message, this.virtualAccount, this.rvirtualAccount});
+  AData({this.status, this.message, this.virtualAccount, this.rvirtualAccount});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory AData.fromJson(Map<String, dynamic> json) {
+    return AData(
       status: json['Status'],
       message: json['Message'],
       virtualAccount: VirtualAccount.fromJson(json['Data']),
