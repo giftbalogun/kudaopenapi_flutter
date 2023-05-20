@@ -1,5 +1,6 @@
 // ignore_for_file: empty_catches, prefer_const_constructors, unnecessary_null_comparison
 import 'dart:math';
+import 'package:example/third.dart';
 import 'package:flutter/material.dart';
 import 'package:kudaopenapi/kudaopenapi.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'KudaOpenAPI Demo Home Page'),
+      home: const MyHomePage(title: 'KudaOpenAPI Demo HomePage'),
     );
   }
 }
@@ -34,8 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var apikey = '';
-  var email = '';
+  var apikey = 'YOUR API KEY';
+  var email = 'YOUR EMAIL';
   var baseurl = 'https://kuda-openapi.kuda.com/v2.1';
 
   @override
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("KudaOpenApi")),
+      appBar: AppBar(title: const Text("GET ACCOUNT BALANCE")),
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -70,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   var something = snapshot.data.data!;
                   return Column(
                     children: [
-                      Text('AccountNumber: ${something!.availableBalance!}'),
+                      Text('AccountBalance: ${something!.availableBalance!}'),
                     ],
                   );
                 }
@@ -83,11 +84,20 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SecondRoute()),
+                MaterialPageRoute(builder: (context) => TransferPage()),
               );
             },
-            child: const Text('Go back!'),
+            child: const Text('Make A Transfer!'),
           ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailsPage()),
+                  );
+                },
+                child: const Text('Get Account Details'),
+              ),
         ]),
       ),
     );
