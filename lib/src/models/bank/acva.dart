@@ -1,3 +1,79 @@
+class AccountResponse {
+  final String message;
+  final bool status;
+  final AccountssData data;
+
+  AccountResponse({
+    required this.message,
+    required this.status,
+    required this.data,
+  });
+
+  factory AccountResponse.fromJson(Map<String, dynamic> json) {
+    return AccountResponse(
+      message: json['message'] ?? '',
+      status: json['status'] ?? false,
+      data: AccountssData.fromJson(json['data'] ?? {}),
+    );
+  }
+}
+
+class AccountssData {
+  final Account account;
+
+  AccountssData({required this.account});
+
+  factory AccountssData.fromJson(Map<String, dynamic> json) {
+    return AccountssData(
+      account: Account.fromJson(json['account'] ?? {}),
+    );
+  }
+}
+
+class Account {
+  final String accountNumber;
+  final String email;
+  final String phoneNumber;
+  final String lastName;
+  final String firstName;
+  final String middleName;
+  final String bussinessName;
+  final String accountName;
+  final String trackingReference;
+  final String creationDate;
+  final bool isDeleted;
+
+  Account({
+    required this.accountNumber,
+    required this.email,
+    required this.phoneNumber,
+    required this.lastName,
+    required this.firstName,
+    required this.middleName,
+    required this.bussinessName,
+    required this.accountName,
+    required this.trackingReference,
+    required this.creationDate,
+    required this.isDeleted,
+  });
+
+  factory Account.fromJson(Map<String, dynamic> json) {
+    return Account(
+      accountNumber: json['accountNumber'] ?? '',
+      email: json['email'] ?? '',
+      phoneNumber: json['phoneNumber'] ?? '',
+      lastName: json['lastName'] ?? '',
+      firstName: json['firstName'] ?? '',
+      middleName: json['middleName'] ?? '',
+      bussinessName: json['bussinessName'] ?? '',
+      accountName: json['accountName'] ?? '',
+      trackingReference: json['trackingReference'] ?? '',
+      creationDate: json['creationDate'] ?? '',
+      isDeleted: json['isDeleted'] ?? false,
+    );
+  }
+}
+
 class ACVAResponse {
   final bool? status;
   final String? message;
@@ -11,8 +87,8 @@ class ACVAResponse {
     return ACVAResponse(
       status: json['Status'],
       message: json['Message'],
-      virtualAccount: VirtualAccount.fromJson(json['Data']),
-      rvirtualAccount: RetrieveVirtualAccount.fromJson(json['Data']['Account']),
+      virtualAccount: VirtualAccount.fromJson(json['data']['account']),
+      rvirtualAccount: RetrieveVirtualAccount.fromJson(json['data']['account']),
     );
   }
 }
@@ -26,51 +102,51 @@ class VirtualAccount {
 
   factory VirtualAccount.fromJson(Map<String, dynamic> json) {
     return VirtualAccount(
-      accountnumber: json['AccountNumber'],
+      accountnumber: json['accountNumber'],
     );
   }
 }
 
 //Retrieve Single Virtual Account
 class RetrieveVirtualAccount {
-  final String? accountnumber;
-  final String? email;
-  final String? phonenumber;
-  final String? lastname;
-  final String? firstname;
-  final String? middlename;
-  final String? businessname;
-  final String? accountname;
-  final String? trackingref;
-  final String? createdat;
-  final bool? isdeleted;
+  final String accountNumber;
+  final String email;
+  final String phoneNumber;
+  final String lastName;
+  final String firstName;
+  final String middleName;
+  final String bussinessName;
+  final String accountName;
+  final String trackingReference;
+  final String creationDate;
+  final bool isDeleted;
 
   RetrieveVirtualAccount(
-      {this.accountnumber,
-      this.email,
-      this.phonenumber,
-      this.lastname,
-      this.firstname,
-      this.middlename,
-      this.businessname,
-      this.accountname,
-      this.trackingref,
-      this.createdat,
-      this.isdeleted});
+      {required this.accountNumber,
+        required this.email,
+        required this.phoneNumber,
+        required this.lastName,
+        required this.firstName,
+        required this.middleName,
+        required this.bussinessName,
+        required this.accountName,
+        required this.trackingReference,
+        required this.creationDate,
+        required this.isDeleted,});
 
   factory RetrieveVirtualAccount.fromJson(Map<String, dynamic> json) {
     return RetrieveVirtualAccount(
-      accountnumber: json['AccountNumber'] ?? 'AccountNumer',
-      email: json['Email'],
-      phonenumber: json['PhoneNumber'],
-      lastname: json['LastName'],
-      firstname: json['FirstName'],
-      middlename: json['middleName'],
-      businessname: json['bussinessName'],
-      accountname: json['AccountName'],
-      trackingref: json['TrackingReference'],
-      createdat: json['CreationDate'],
-      isdeleted: json['isDeleted'],
+      accountNumber: json['accountNumber'] ?? '',
+      email: json['email'] ?? '',
+      phoneNumber: json['phoneNumber'] ?? '',
+      lastName: json['lastName'] ?? '',
+      firstName: json['firstName'] ?? '',
+      middleName: json['middleName'] ?? '',
+      bussinessName: json['bussinessName'] ?? '',
+      accountName: json['accountName'] ?? '',
+      trackingReference: json['trackingReference'] ?? '',
+      creationDate: json['creationDate'] ?? '',
+      isDeleted: json['isDeleted'] ?? false,
     );
   }
 }

@@ -46,7 +46,7 @@ class ApiService extends GetxService {
       // If the request was successful, parse the JSON response
       String data = json.decode(json.encode(response.body));
       // Return the token
-
+      //print(data);
       return data;
     } else {
       // If the request was not successful, throw an exception

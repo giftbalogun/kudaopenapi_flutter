@@ -49,3 +49,9 @@
 -Code Fixes
 -Updated API Calls
 
+## 0.0.9
+-Updated Example with 2 new details
+-Updated Model Library
+-Updated API library
+-Updated Services Library
+-Bug fixes and improment

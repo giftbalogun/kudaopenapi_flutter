@@ -116,3 +116,205 @@ class Item {
     );
   }
 }
+
+//buy gift card
+class GiftCardPurchaseResponse {
+  String? message;
+  bool? status;
+  GiftCardPurchaseResponseData? data;
+  String? requestReference;
+  String? transactionResponseCode;
+
+  GiftCardPurchaseResponse({
+    this.message,
+    this.status,
+    this.data,
+    this.requestReference,
+    this.transactionResponseCode,
+  });
+
+  factory GiftCardPurchaseResponse.fromJson(Map<String, dynamic> json) {
+    return GiftCardPurchaseResponse(
+      message: json['message'],
+      status: json['status'],
+      data: GiftCardPurchaseResponseData.fromJson(json['data']),
+      requestReference: json['requestReference'],
+      transactionResponseCode: json['transactionResponseCode'],
+    );
+  }
+}
+
+class GiftCardPurchaseResponseData {
+  int? totalDebit;
+  String? reference;
+  GiftCardPurchaseResponsePin? pin;
+
+  GiftCardPurchaseResponseData({
+    this.totalDebit,
+    this.reference,
+    this.pin,
+  });
+
+  factory GiftCardPurchaseResponseData.fromJson(Map<String, dynamic> json) {
+    return GiftCardPurchaseResponseData(
+      totalDebit: json['totalDebit'],
+      reference: json['reference'],
+      pin: GiftCardPurchaseResponsePin.fromJson(json['pin']),
+    );
+  }
+}
+
+class GiftCardPurchaseResponsePin {
+  String? number;
+  String? serial;
+  String? instructions;
+
+  GiftCardPurchaseResponsePin({
+    this.number,
+    this.serial,
+    this.instructions,
+  });
+
+  factory GiftCardPurchaseResponsePin.fromJson(Map<String, dynamic> json) {
+    return GiftCardPurchaseResponsePin(
+      number: json['number'],
+      serial: json['serial'],
+      instructions: json['instructions'],
+    );
+  }
+}
+
+//transaction history/status
+class TransactionResponse {
+  final bool status;
+  final String message;
+  final TransactionData data;
+
+  TransactionResponse({
+    required this.status,
+    required this.message,
+    required this.data,
+  });
+
+  factory TransactionResponse.fromJson(Map<String, dynamic> json) {
+    return TransactionResponse(
+      status: json['Status'],
+      message: json['Message'],
+      data: TransactionData.fromJson(json['Data']),
+    );
+  }
+}
+
+class TransactionData {
+  final String statusCode;
+  final TransactionDetails transactionDetails;
+  final TSQDetails tsqDetails;
+
+  TransactionData({
+    required this.statusCode,
+    required this.transactionDetails,
+    required this.tsqDetails,
+  });
+
+  factory TransactionData.fromJson(Map<String, dynamic> json) {
+    return TransactionData(
+      statusCode: json['StatusCode'],
+      transactionDetails:
+          TransactionDetails.fromJson(json['TransactionDetails']),
+      tsqDetails: TSQDetails.fromJson(json['TSQDetails']),
+    );
+  }
+}
+
+class TransactionDetails {
+  final String billerName;
+  final String kudaReference;
+  final String kudaAccountNumber;
+  final String transactionChannel;
+  final int transactionAmount;
+  final String recipientNumber;
+  final int transactionStatus;
+  final int postingStatus;
+  final String hasBeenReserved;
+  final String billType;
+
+  TransactionDetails({
+    required this.billerName,
+    required this.kudaReference,
+    required this.kudaAccountNumber,
+    required this.transactionChannel,
+    required this.transactionAmount,
+    required this.recipientNumber,
+    required this.transactionStatus,
+    required this.postingStatus,
+    required this.hasBeenReserved,
+    required this.billType,
+  });
+
+  factory TransactionDetails.fromJson(Map<String, dynamic> json) {
+    return TransactionDetails(
+      billerName: json['BillerName'],
+      kudaReference: json['KudaReference'],
+      kudaAccountNumber: json['KudaAccountNumber'],
+      transactionChannel: json['TransactionChannel'],
+      transactionAmount: json['TransactionAmount'],
+      recipientNumber: json['RecipientNumber'],
+      transactionStatus: json['TransactionStatus'],
+      postingStatus: json['PostingStatus'],
+      hasBeenReserved: json['HasBeenReserved'],
+      billType: json['BillType'],
+    );
+  }
+}
+
+class TSQDetails {
+  final String aggregatorTsqCode;
+  final String reference;
+  final String customerToken;
+  final Pin pin;
+  final bool isSuccessful;
+  final String message;
+  final String statusCode;
+
+  TSQDetails({
+    required this.aggregatorTsqCode,
+    required this.reference,
+    required this.customerToken,
+    required this.pin,
+    required this.isSuccessful,
+    required this.message,
+    required this.statusCode,
+  });
+
+  factory TSQDetails.fromJson(Map<String, dynamic> json) {
+    return TSQDetails(
+      aggregatorTsqCode: json['AggregatorTsqCode'],
+      reference: json['Reference'],
+      customerToken: json['CustomerToken'],
+      pin: Pin.fromJson(json['Pin']),
+      isSuccessful: json['IsSuccessful'],
+      message: json['Message'],
+      statusCode: json['StatusCode'],
+    );
+  }
+}
+
+class Pin {
+  final String number;
+  final String serial;
+  final String instructions;
+
+  Pin({
+    required this.number,
+    required this.serial,
+    required this.instructions,
+  });
+
+  factory Pin.fromJson(Map<String, dynamic> json) {
+    return Pin(
+      number: json['Number'],
+      serial: json['Serial'],
+      instructions: json['Instructions'],
+    );
+  }
+}

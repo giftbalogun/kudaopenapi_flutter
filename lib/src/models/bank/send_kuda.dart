@@ -19,11 +19,11 @@ class SendMoneyKuda {
 
   factory SendMoneyKuda.fromJson(Map<String, dynamic> json) {
     return SendMoneyKuda(
-      requestReference: json['RequestReference'] ?? 'request ref',
-      transactionReference: json['TransactionReference'] ?? 'trans ref',
-      responseCode: json['ResponseCode'] ?? 'response code',
-      status: json['Status'] ?? 'unknown status',
-      message: json['Message'] ?? 'message',
+      requestReference: json['requestReference'] ?? 'request ref',
+      transactionReference: json['transactionReference'] ?? 'trans ref',
+      responseCode: json['responseCode'] ?? 'unknown code',
+      status: json['status'] ?? 'unknown status',
+      message: json['message'] ?? 'message',
     );
   }
 }

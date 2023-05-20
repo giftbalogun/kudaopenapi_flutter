@@ -84,4 +84,7 @@ class ServiceTypes {
 
   //Kuda Gift Card
   static const GET_GIFT_CARD = 'GET_GIFT_CARD';
+  static const ADMIN_BUY_GIFT_CARD = 'ADMIN_BUY_GIFT_CARD';
+  static const BUY_GIFT_CARD = 'BUY_GIFT_CARD';
+  static const GIFT_CARD_TSQ = 'GIFT_CARD_TSQ';
 }

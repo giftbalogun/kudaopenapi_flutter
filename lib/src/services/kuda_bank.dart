@@ -105,7 +105,7 @@ class KudaBank {
 
   // Kuda GET VIRTUAL ACCOUNT DETAILS
   //https://kudabank.gitbook.io/kudabank/virtual-account-creation/retrieve-virtual-account
-  Future<ACVAResponse> retrieve_virtual_account(Map<String, dynamic> payload,
+  Future<AccountResponse> retrieve_virtual_account(Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService().makeRequest(
@@ -114,7 +114,7 @@ class KudaBank {
         requestRef);
 
     // Create a new instance of the `KudaResponse` class
-    var kudaResponse = ACVAResponse.fromJson(response);
+    var kudaResponse = AccountResponse.fromJson(response);
 
     // Return the `KudaResponse` instance
     return kudaResponse;

@@ -19,4 +19,41 @@ class KudaGiftCard {
     // Return the `KudaResponse` instance
     return kudaResponse;
   }
+
+  Future<GiftCardPurchaseResponse> admin_purchase_card(
+      [String? requestRef]) async {
+    // Make the API request using the `makeRequest` method
+    var response = await ApiService()
+        .makeRequest(ServiceTypes.ADMIN_BUY_GIFT_CARD, {}, requestRef);
+
+    // Create a new instance of the `KudaResponse` class
+    var kudaResponse = GiftCardPurchaseResponse.fromJson(response);
+
+    // Return the `KudaResponse` instance
+    return kudaResponse;
+  }
+
+  Future<GiftCardPurchaseResponse> buy_gift_card([String? requestRef]) async {
+    // Make the API request using the `makeRequest` method
+    var response = await ApiService()
+        .makeRequest(ServiceTypes.BUY_GIFT_CARD, {}, requestRef);
+
+    // Create a new instance of the `KudaResponse` class
+    var kudaResponse = GiftCardPurchaseResponse.fromJson(response);
+
+    // Return the `KudaResponse` instance
+    return kudaResponse;
+  }
+
+  Future<TransactionResponse> gift_card_tsq([String? requestRef]) async {
+    // Make the API request using the `makeRequest` method
+    var response = await ApiService()
+        .makeRequest(ServiceTypes.GIFT_CARD_TSQ, {}, requestRef);
+
+    // Create a new instance of the `KudaResponse` class
+    var kudaResponse = TransactionResponse.fromJson(response);
+
+    // Return the `KudaResponse` instance
+    return kudaResponse;
+  }
 }

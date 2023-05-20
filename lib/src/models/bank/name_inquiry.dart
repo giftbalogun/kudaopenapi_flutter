@@ -7,9 +7,9 @@ class NameInquiryResponse {
 
   factory NameInquiryResponse.fromJson(Map<String, dynamic> json) {
     return NameInquiryResponse(
-      status: json['Status'],
-      message: json['Message'],
-      nameInquiry: NameInquiry.fromJson(json['Data']),
+      status: json['status'],
+      message: json['message'],
+      nameInquiry: NameInquiry.fromJson(json['data']),
     );
   }
 }
@@ -23,7 +23,7 @@ class NameInquiry {
   final String? beneficiaryBankCode;
   final int? nameEnquiryID;
   final String? responseCode;
-  final double? transferCharge;
+  final int? transferCharge;
   final String? sessionID;
 
   NameInquiry({
@@ -41,16 +41,16 @@ class NameInquiry {
 
   factory NameInquiry.fromJson(Map<String, dynamic> json) {
     return NameInquiry(
-      beneficiaryAccountNumber: json['BeneficiaryAccountNumber'],
-      beneficiaryName: json['BeneficiaryName'],
-      senderAccountNumber: json['SenderAccountNumber'],
-      senderName: json['SenderName'],
-      beneficiaryCustomerID: json['BeneficiaryCustomerID'],
-      beneficiaryBankCode: json['BeneficiaryBankCode'],
-      nameEnquiryID: json['NameEnquiryID'],
-      responseCode: json['ResponseCode'],
-      transferCharge: json['TransferCharge'],
-      sessionID: json['SessionID'],
+      beneficiaryAccountNumber: json['beneficiaryAccountNumber'],
+      beneficiaryName: json['beneficiaryName'],
+      senderAccountNumber: json['senderAccountNumber'],
+      senderName: json['senderName'],
+      beneficiaryCustomerID: json['beneficiaryCustomerID'],
+      beneficiaryBankCode: json['beneficiaryBankCode'],
+      nameEnquiryID: json['nameEnquiryID'],
+      responseCode: json['responseCode'],
+      transferCharge: json['transferCharge'],
+      sessionID: json['sessionID'],
     );
   }
 }
