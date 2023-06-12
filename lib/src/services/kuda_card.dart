@@ -2,7 +2,7 @@
 
 import 'package:kudaopenapi/src/common/api_service.dart';
 import 'package:kudaopenapi/src/constants/service_type.dart';
-import 'package:kudaopenapi/src/models/kuda_card/card_model.dart';
+import 'package:kudaopenapi/src/response/kuda_card/card_model.dart';
 
 class KudaCard {
   // Request for Card

@@ -1,13 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:kudaopenapi/src/common/api_service.dart';
-import 'package:kudaopenapi/src/models/bank/bank_list.dart';
+import 'package:kudaopenapi/src/response/bank/bank_list.dart';
 
 import '../constants/service_type.dart';
-import '../models/bank/acva.dart';
-import '../models/bank/balance.dart';
-import '../models/bank/name_inquiry.dart';
-import '../models/bank/send_kuda.dart';
-import '../models/transaction_history/kudatrans.dart';
+import '../response/bank/acva.dart';
+import '../response/bank/balance.dart';
+import '../response/bank/name_inquiry.dart';
+import '../response/bank/send_kuda.dart';
+import '../response/transaction_history/kudatrans.dart';
 
 class KudaBank {
   // Define a function to get the bank list from the API
@@ -103,6 +103,20 @@ class KudaBank {
     return kudaResponse;
   }
 
+  Future<ListVirtualAccountResponse> list_virtual_account(
+      Map<String, dynamic> payload,
+      [String? requestRef]) async {
+    // Make the API request using the `makeRequest` method
+    var response = await ApiService()
+        .makeRequest(ServiceTypes.ADMIN_VIRTUAL_ACCOUNTS, payload, requestRef);
+
+    // Create a new instance of the `KudaResponse` class
+    var kudaResponse = ListVirtualAccountResponse.fromJson(response);
+
+    // Return the `KudaResponse` instance
+    return kudaResponse;
+  }
+
   // Kuda GET VIRTUAL ACCOUNT DETAILS
   //https://kudabank.gitbook.io/kudabank/virtual-account-creation/retrieve-virtual-account
   Future<AccountResponse> retrieve_virtual_account(Map<String, dynamic> payload,
@@ -145,6 +159,8 @@ class KudaBank {
     var response = await ApiService().makeRequest(
         ServiceTypes.ADMIN_MAIN_ACCOUNT_TRANSACTIONS, payload, requestRef);
 
+    print(response);
+
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = KudaTransactionlog.fromJson(response);
 
@@ -178,7 +194,6 @@ class KudaBank {
     // Make the API request using the `makeRequest` method
     var response = await ApiService().makeRequest(
         ServiceTypes.ADMIN_VIRTUAL_ACCOUNT_TRANSACTIONS, payload, requestRef);
-
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = KudaTransactionlog.fromJson(response);
 

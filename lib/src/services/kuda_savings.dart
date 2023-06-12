@@ -2,8 +2,8 @@
 
 import 'package:kudaopenapi/src/common/api_service.dart';
 import 'package:kudaopenapi/src/constants/service_type.dart';
-import 'package:kudaopenapi/src/models/saving/plain_savings.dart';
-import 'package:kudaopenapi/src/models/saving/flexible_savings.dart';
+import 'package:kudaopenapi/src/response/saving/plain_savings.dart';
+import 'package:kudaopenapi/src/response/saving/flexible_savings.dart';
 
 class KudaSavings {
   // Create a plain savings account

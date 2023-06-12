@@ -121,18 +121,19 @@ class RetrieveVirtualAccount {
   final String creationDate;
   final bool isDeleted;
 
-  RetrieveVirtualAccount(
-      {required this.accountNumber,
-        required this.email,
-        required this.phoneNumber,
-        required this.lastName,
-        required this.firstName,
-        required this.middleName,
-        required this.bussinessName,
-        required this.accountName,
-        required this.trackingReference,
-        required this.creationDate,
-        required this.isDeleted,});
+  RetrieveVirtualAccount({
+    required this.accountNumber,
+    required this.email,
+    required this.phoneNumber,
+    required this.lastName,
+    required this.firstName,
+    required this.middleName,
+    required this.bussinessName,
+    required this.accountName,
+    required this.trackingReference,
+    required this.creationDate,
+    required this.isDeleted,
+  });
 
   factory RetrieveVirtualAccount.fromJson(Map<String, dynamic> json) {
     return RetrieveVirtualAccount(
@@ -147,6 +148,89 @@ class RetrieveVirtualAccount {
       trackingReference: json['trackingReference'] ?? '',
       creationDate: json['creationDate'] ?? '',
       isDeleted: json['isDeleted'] ?? false,
+    );
+  }
+}
+
+//Get List of Virtual Accounts
+class ListVirtualAccountResponse {
+  final String message;
+  final bool status;
+  final ListVirtualAccountData data;
+
+  ListVirtualAccountResponse({
+    required this.message,
+    required this.status,
+    required this.data,
+  });
+
+  factory ListVirtualAccountResponse.fromJson(Map<String, dynamic> json) {
+    return ListVirtualAccountResponse(
+      message: json['message'],
+      status: json['status'],
+      data: ListVirtualAccountData.fromJson(json['data']),
+    );
+  }
+}
+
+class ListVirtualAccountData {
+  final List<LVirtualAccount> accounts;
+  final int totalCount;
+
+  ListVirtualAccountData({
+    required this.accounts,
+    required this.totalCount,
+  });
+
+  factory ListVirtualAccountData.fromJson(Map<String, dynamic> json) {
+    return ListVirtualAccountData(
+      accounts: List<LVirtualAccount>.from(
+          json['accounts'].map((account) => LVirtualAccount.fromJson(account))),
+      totalCount: json['totalCount'],
+    );
+  }
+}
+
+class LVirtualAccount {
+  final String accountNumber;
+  final String email;
+  final String phoneNumber;
+  final String lastName;
+  final String firstName;
+  final String? middleName;
+  final String? businessName;
+  final String accountName;
+  final String trackingReference;
+  final String creationDate;
+  final bool isDeleted;
+
+  LVirtualAccount({
+    required this.accountNumber,
+    required this.email,
+    required this.phoneNumber,
+    required this.lastName,
+    required this.firstName,
+    this.middleName,
+    this.businessName,
+    required this.accountName,
+    required this.trackingReference,
+    required this.creationDate,
+    required this.isDeleted,
+  });
+
+  factory LVirtualAccount.fromJson(Map<String, dynamic> json) {
+    return LVirtualAccount(
+      accountNumber: json['accountNumber'],
+      email: json['email'],
+      phoneNumber: json['phoneNumber'],
+      lastName: json['lastName'],
+      firstName: json['firstName'],
+      middleName: json['middleName'],
+      businessName: json['bussinessName'],
+      accountName: json['accountName'],
+      trackingReference: json['trackingReference'],
+      creationDate: json['creationDate'],
+      isDeleted: json['isDeleted'],
     );
   }
 }

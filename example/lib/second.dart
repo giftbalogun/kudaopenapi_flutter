@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api, use_key_in_widget_constructors
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ class TransferPage extends StatefulWidget {
 }
 
 class _TransferPageState extends State<TransferPage> {
-
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   late TextEditingController _accountController;
   late TextEditingController _amountController;
@@ -21,6 +22,7 @@ class _TransferPageState extends State<TransferPage> {
   String? session_id;
   String? bank_codes;
   String? response_codes;
+  String requestRef = Random().nextInt(100000).toString();
 
   @override
   void initState() {
@@ -38,14 +40,13 @@ class _TransferPageState extends State<TransferPage> {
     super.dispose();
   }
 
-  String requestRef = Random().nextInt(100000).toString();
-
   Future<void> fetchBankList() async {
     try {
       BankResponse bankResponse = await KudaBank().getBankList(requestRef);
       setState(() {
         bankList = bankResponse.data.banks;
-        selectedBankCode = bankList.isNotEmpty ? bankList[0].bankCode.toString() : null;
+        selectedBankCode =
+            bankList.isNotEmpty ? bankList[0].bankCode.toString() : null;
       });
     } catch (error) {
       print('Error fetching bank list: $error');
@@ -93,7 +94,6 @@ class _TransferPageState extends State<TransferPage> {
               style: const TextStyle(color: Colors.green, fontSize: 15),
             ),
             const SizedBox(height: 6),
-
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Account No.',
@@ -165,14 +165,16 @@ class _TransferPageState extends State<TransferPage> {
               height: 16,
             ),
             MaterialButton(
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                child: const Text('Make Transfer'),
-                onPressed: () {
-                  performMoneyTransfer(context);
-                },),
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
+              padding: const EdgeInsets.all(16),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0)),
+              child: const Text('Make Transfer'),
+              onPressed: () {
+                performMoneyTransfer(context);
+              },
+            ),
           ],
         ),
       ),
@@ -188,7 +190,8 @@ class _TransferPageState extends State<TransferPage> {
         'SenderTrackingReference': '',
         'isRequestFromVirtualAccount': true,
       };
-      NameInquiryResponse response = await KudaBank().name_inquiry(data, requestRef);
+      NameInquiryResponse response =
+          await KudaBank().name_inquiry(data, requestRef);
       setState(() {
         accountName = response.nameInquiry!.beneficiaryName;
         session_id = response.nameInquiry!.sessionID;
@@ -222,7 +225,8 @@ class _TransferPageState extends State<TransferPage> {
         'clientFeeCharge': 0,
       };
 
-      SendMoneyKuda response =  await KudaBank().single_fund_transfer(data, requestRef);
+      SendMoneyKuda response =
+          await KudaBank().single_fund_transfer(data, requestRef);
 
       // Check the response for success
       if (response.status == true) {
@@ -274,5 +278,6 @@ class _TransferPageState extends State<TransferPage> {
           ],
         ),
       );
-    }}
+    }
+  }
 }

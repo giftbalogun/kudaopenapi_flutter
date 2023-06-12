@@ -32,7 +32,7 @@ class AccountData {
   factory AccountData.fromJson(Map<String, dynamic> json) {
     return AccountData(
       ledgerBalance: json['ledgerBalance'].toDouble() ?? '99.0',
-      availableBalance: json['availableBalance'] ?? '88',
+      availableBalance: json['availableBalance'] ?? 8888,
       withdrawableBalance: json['withdrawableBalance'] ?? '99',
     );
   }

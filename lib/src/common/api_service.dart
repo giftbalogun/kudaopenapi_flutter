@@ -15,7 +15,7 @@ class ApiService extends GetxService {
     _apikey = apikey;
   }
 
-  // Define a function to get a token from the API
+  /// Define a function to get a token from the API
   Future<String> getToken() async {
     // Set the base URL for the API
     String baseUrl = _baseurl!;
@@ -46,7 +46,6 @@ class ApiService extends GetxService {
       // If the request was successful, parse the JSON response
       String data = json.decode(json.encode(response.body));
       // Return the token
-      //print(data);
       return data;
     } else {
       // If the request was not successful, throw an exception
@@ -54,6 +53,7 @@ class ApiService extends GetxService {
     }
   }
 
+  ///Make a request with Token
   Future<Map<String, dynamic>> makeRequest(
       String action, Map<String, dynamic> payload,
       [String? requestRef]) async {

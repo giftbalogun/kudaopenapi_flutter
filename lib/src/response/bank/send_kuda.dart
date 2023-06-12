@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+//Send Money Via Kuda Api
 class SendMoneyKuda {
   final String? requestReference;
   final String? transactionReference;
@@ -28,6 +29,7 @@ class SendMoneyKuda {
   }
 }
 
+//Get Transaction History
 class TransactionStatusQuery {
   final QueryData? data;
   final String? password;
