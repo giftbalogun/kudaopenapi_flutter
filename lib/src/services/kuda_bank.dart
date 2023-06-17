@@ -159,8 +159,6 @@ class KudaBank {
     var response = await ApiService().makeRequest(
         ServiceTypes.ADMIN_MAIN_ACCOUNT_TRANSACTIONS, payload, requestRef);
 
-    print(response);
-
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = KudaTransactionlog.fromJson(response);
 

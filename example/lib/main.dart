@@ -225,7 +225,7 @@ class _AccountState extends State<Account> {
                 Text(dateString,
                     style: const TextStyle(color: Colors.grey, fontSize: 14.0)),
                 Text(type,
-                    style: const TextStyle(color: Colors.grey, fontSize: 14.0))
+                    style: const TextStyle(color: Colors.grey, fontSize: 5.0))
               ],
             ),
           ],
@@ -233,8 +233,8 @@ class _AccountState extends State<Account> {
       );
 
   Map<String, dynamic> tdata = {
-    'PageSize': "1",
-    'PageNumber': "1",
+    'PageSize': "20",
+    'PageNumber': "2",
   };
 
   displayAccoutList() {
@@ -252,11 +252,10 @@ class _AccountState extends State<Account> {
                 itemBuilder: (context, index) {
                   final transaction =
                       snapshot.data!.data.postingsHistory[index];
-                  DateTime dateTime = DateTime.parse(transaction.realDate);
                   String formattedDate =
-                      DateFormat('yyyy-MM-dd').format(dateTime);
+                      DateFormat('yyyy-MM-dd').format(transaction.realDate);
                   return accountItems(
-                    transaction.beneficiaryName,
+                    transaction.beneficiaryName ?? 'something',
                     currencyFormatter.format(transaction.amount / 100 - 10),
                     formattedDate,
                     transaction.narration,

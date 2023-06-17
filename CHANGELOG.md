@@ -77,3 +77,7 @@
 ## 0.1.1
 
 -no major change
+
+## 0.1.2
+
+-bug fixes and improvement
