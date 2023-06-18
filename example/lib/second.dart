@@ -192,6 +192,9 @@ class _TransferPageState extends State<TransferPage> {
       };
       NameInquiryResponse response =
           await KudaBank().name_inquiry(data, requestRef);
+
+      print("Request Reference " + requestRef);
+
       setState(() {
         accountName = response.nameInquiry!.beneficiaryName;
         session_id = response.nameInquiry!.sessionID;
@@ -224,6 +227,8 @@ class _TransferPageState extends State<TransferPage> {
         'senderName': accountNames,
         'clientFeeCharge': 0,
       };
+
+      print("Request Reference " + requestRef);
 
       SendMoneyKuda response =
           await KudaBank().single_fund_transfer(data, requestRef);
