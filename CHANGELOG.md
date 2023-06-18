@@ -85,3 +85,11 @@
 ## 0.1.3
 
 -Updated Billing Library
+
+## 0.1.4
+
+-Bug fixes and improvemnt
+
+## 0.1.5
+
+-Bug fixes and improvemnt

@@ -11,7 +11,7 @@ class KudaBilling {
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
-        .makeRequest(ServiceTypes.GET_BILLERS_BY_TYPE, {}, requestRef);
+        .makeRequest(ServiceTypes.GET_BILLERS_BY_TYPE, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = BillingResponse.fromJson(response);
@@ -25,7 +25,7 @@ class KudaBilling {
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
-        .makeRequest(ServiceTypes.VERIFY_BILL_CUSTOMER, {}, requestRef);
+        .makeRequest(ServiceTypes.VERIFY_BILL_CUSTOMER, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = VerifyBillingResponse.fromJson(response);
@@ -39,7 +39,7 @@ class KudaBilling {
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
-        .makeRequest(ServiceTypes.ADMIN_PURCHASE_BILL, {}, requestRef);
+        .makeRequest(ServiceTypes.ADMIN_PURCHASE_BILL, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = PurcahseBillingResponse.fromJson(response);
@@ -52,7 +52,7 @@ class KudaBilling {
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
-        .makeRequest(ServiceTypes.PURCHASE_BILL, {}, requestRef);
+        .makeRequest(ServiceTypes.PURCHASE_BILL, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = PurcahseBillingResponse.fromJson(response);
@@ -64,8 +64,8 @@ class KudaBilling {
   Future<PurcahseBillingResponse> BILL_TSQ(Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
-    var response =
-        await ApiService().makeRequest(ServiceTypes.BILL_TSQ, {}, requestRef);
+    var response = await ApiService()
+        .makeRequest(ServiceTypes.BILL_TSQ, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = PurcahseBillingResponse.fromJson(response);
@@ -79,7 +79,7 @@ class KudaBilling {
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
-        .makeRequest(ServiceTypes.GET_PURCHADED_BILLS, {}, requestRef);
+        .makeRequest(ServiceTypes.GET_PURCHADED_BILLS, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = AdminGetPurchadedBills.fromJson(response);
@@ -92,8 +92,8 @@ class KudaBilling {
       Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
-    var response = await ApiService()
-        .makeRequest(ServiceTypes.ADMIN_GET_PURCHADED_BILLS, {}, requestRef);
+    var response = await ApiService().makeRequest(
+        ServiceTypes.ADMIN_GET_PURCHADED_BILLS, payload, requestRef);
 
     // Create a new instance of the `KudaResponse` class
     var kudaResponse = AdminGetPurchadedBills.fromJson(response);
