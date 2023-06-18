@@ -7,7 +7,8 @@ import 'package:kudaopenapi/src/response/bills/purchasebill.dart';
 
 class KudaBilling {
   // Manage Kuda Billing & Betting
-  Future<BillingResponse> GET_BILLERS_BY_TYPE([String? requestRef]) async {
+  Future<BillingResponse> GET_BILLERS_BY_TYPE(Map<String, dynamic> payload,
+      [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
         .makeRequest(ServiceTypes.GET_BILLERS_BY_TYPE, {}, requestRef);
@@ -20,6 +21,7 @@ class KudaBilling {
   }
 
   Future<VerifyBillingResponse> VERIFY_BILL_CUSTOMER(
+      Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
@@ -33,6 +35,7 @@ class KudaBilling {
   }
 
   Future<PurcahseBillingResponse> ADMIN_PURCHASE_BILL(
+      Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
@@ -45,7 +48,8 @@ class KudaBilling {
     return kudaResponse;
   }
 
-  Future<PurcahseBillingResponse> PURCHASE_BILL([String? requestRef]) async {
+  Future<PurcahseBillingResponse> PURCHASE_BILL(Map<String, dynamic> payload,
+      [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
         .makeRequest(ServiceTypes.PURCHASE_BILL, {}, requestRef);
@@ -57,7 +61,8 @@ class KudaBilling {
     return kudaResponse;
   }
 
-  Future<PurcahseBillingResponse> BILL_TSQ([String? requestRef]) async {
+  Future<PurcahseBillingResponse> BILL_TSQ(Map<String, dynamic> payload,
+      [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response =
         await ApiService().makeRequest(ServiceTypes.BILL_TSQ, {}, requestRef);
@@ -70,6 +75,7 @@ class KudaBilling {
   }
 
   Future<AdminGetPurchadedBills> GET_PURCHADED_BILLS(
+      Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
@@ -83,6 +89,7 @@ class KudaBilling {
   }
 
   Future<AdminGetPurchadedBills> ADMIN_GET_PURCHADED_BILLS(
+      Map<String, dynamic> payload,
       [String? requestRef]) async {
     // Make the API request using the `makeRequest` method
     var response = await ApiService()
