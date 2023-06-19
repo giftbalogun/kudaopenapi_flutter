@@ -3,6 +3,7 @@
 import 'package:example/getvaccount.dart';
 import 'package:example/third.dart';
 import 'package:flutter/material.dart';
+import '../billing.dart';
 import '../second.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -45,6 +46,14 @@ class _AppDrawerState extends State<AppDrawer> {
             const Divider(),
             buildMenuItem(Icons.account_balance, "V Details", DetailsPage(),
                 opacity: 1.0, color: const Color(0xFF015FFF)),
+            buildMenuItem(
+                Icons.account_balance,
+                "Billers",
+                BillingsDetail(
+                  billingget: 'electricity',
+                ),
+                opacity: 1.0,
+                color: const Color(0xFF015FFF)),
             // const Divider(),
             // buildMenuItem(Icons.attach_money, "PAYMENTS"),
             // const Divider(),

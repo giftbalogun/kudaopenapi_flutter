@@ -93,3 +93,8 @@
 ## 0.1.5
 
 -Bug fixes and improvemnt
+
+## 0.1.6
+
+-Bug fixes and improvemnt
+-added library

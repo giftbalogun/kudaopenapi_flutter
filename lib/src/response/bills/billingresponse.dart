@@ -54,11 +54,11 @@ class BillingData {
 }
 
 class Biller {
-  String id;
-  String name;
-  String description;
-  String billerIconUrl;
-  String billTypeId;
+  String? id;
+  String? name;
+  String? description;
+  String? billerIconUrl;
+  String? billTypeId;
   List<BillItem> billItems;
 
   Biller({
@@ -91,13 +91,13 @@ class Biller {
 }
 
 class BillItem {
-  String id;
-  String name;
-  String description;
-  String kudaIdentifier;
+  String? id;
+  String? name;
+  String? description;
+  String? kudaIdentifier;
   int amount;
   bool isFixedPrice;
-  String billerId;
+  String? billerId;
   bool isActive;
   dynamic vendingAggregator;
 
