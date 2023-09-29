@@ -48,7 +48,7 @@ class _AccountState extends State<Account> {
         accountbalance = gbalance.data.availableBalance / 100;
       });
     } catch (error) {
-      print('Error getting details: $error');
+      print('Balance Error: $error');
     }
   }
 

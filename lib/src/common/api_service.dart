@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:kudaopenapi/src/common/api_response.dart';
 
 class ApiService extends GetxService {
   static String? _baseurl;
@@ -54,6 +55,34 @@ class ApiService extends GetxService {
   }
 
   ///Make a request with Token
+  // Future<Map<String, dynamic>> makeRequest(
+  //     String action, Map<String, dynamic> payload,
+  //     [String? requestRef]) async {
+  //   // Set the headers for the HTTP request
+  //   Map<String, String> headers = {
+  //     'Authorization': 'Bearer ${await getToken()}',
+  //     'Content-Type': 'application/json',
+  //   };
+
+  //   // Set the request body
+  //   Map<String, dynamic> body = {
+  //     'servicetype': action,
+  //     'requestref': requestRef,
+  //     'data': payload,
+  //   };
+
+  //   try {
+  //     http.Response response = await http.post(Uri.parse(_baseurl!),
+  //         body: json.encode(body), headers: headers);
+  //     return json.decode(response.body);
+  //   } catch (e) {
+  //     return {
+  //       'statusCode': ApiResponse.getMessageForStatusCode(401),
+  //       'statusText': 'No internet connection',
+  //     };
+  //   }
+  // }
+
   Future<Map<String, dynamic>> makeRequest(
       String action, Map<String, dynamic> payload,
       [String? requestRef]) async {
@@ -73,10 +102,35 @@ class ApiService extends GetxService {
     try {
       http.Response response = await http.post(Uri.parse(_baseurl!),
           body: json.encode(body), headers: headers);
-      return json.decode(response.body);
-    } catch (e) {
+
+      // Handle different status codes here
+      if (response.statusCode == 200) {
+        // Request successful, parse and return the response body
+        return json.decode(response.body);
+      } else if (response.statusCode == 401) {
+        // Authentication failure
+        return {
+          'statusCode': response.statusCode,
+          'statusText': ApiResponse.getMessageForStatusCode(401),
+        };
+      } else if (response.statusCode == 404) {
+        // Resource not found
+        return {
+          'statusCode': response.statusCode,
+          'statusText': ApiResponse.getMessageForStatusCode(404),
+        };
+      }
+      // Handle more status codes as needed
+
+      // If the status code is not explicitly handled, return a generic error
       return {
-        'statusCode': 1,
+        'statusCode': response.statusCode,
+        'statusText': 'Error: ${response.reasonPhrase}',
+      };
+    } catch (e) {
+      // If there's an exception (e.g., no internet connection), return an error
+      return {
+        'statusCode': ApiResponse.getMessageForStatusCode(503),
         'statusText': 'No internet connection',
       };
     }
